@@ -1,0 +1,166 @@
+{% extends 'temp/admin.html' %}
+
+{% block adminMiddle %}
+    <title>Update Fee - {{ stu.name }} | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/student/profile.css">
+    <link rel="stylesheet" href="/static/style/fees/studentpaid.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Student paid fee</b> </header>
+        <div class="middle-inner-cont student-paid"> {% csrf_token %}
+            <input type="hidden" id="stu" value="{{ stu.stu_id }}">
+
+            <div class="profile-picName-cont">
+                <section class="profile-picName-left">
+                    <article class="profile-pic-cont"> <img src="/static/{{ stu.image }}"> </article>
+                    <article class="profile-name-cont">{{ stu.name }}</article>
+                    <article class="profile-name-admno">{{ stu.adm_no }}</article>
+                </section>
+
+                <section class="profile-picName-right">
+                    <article >
+                        <span>{{ stu.dep }}</span>
+                        <span>Department</span>
+                    </article>
+                    <article>
+                        <span>{{ request.GET.sem}}</span>
+                        <span>Semester</span>
+                    </article>
+                </section>
+            </div>
+
+            {% for f in fee %}
+                <div class="stu-fee-cont">
+                    <header> <b>{{ f.fee_name }} fee</b> </header>
+                    {% if f.due_date %}
+                        <article>Due : {{ f.due_date }} </article>
+                    {% endif %}
+                    <div class="stu-fee-list-cont">
+                        <section class="stu-paid-cont">
+                            <article>{{ f.paid }}</article>
+                            <article>Paid</article>
+                        </section>
+                        <section class="stu-balance-cont">
+                            <article>{{ f.balance }}</article>
+                            <article>Balance</article>
+                        </section>
+                        <section class="stu-total-cont">
+                            <article>{{ f.fee_amount }}</article>
+                            <article>Total</article>
+                        </section>
+                    </div>
+
+                    <div class="stu-addFee-cont">
+                        <section>
+                            <span>Student paid</span>
+                            <input type="text" id="fee{{ f.fee_id  }}" oninput="checkFeild(this)">
+                            <label class="errMsgFee{{ f.fee_id }}">sdfsd</label>
+                        </section>
+                        <section>
+                            <span>Date</span>
+                            <input type="date" id="date{{ f.fee_id  }}">
+                            <label class="errMsgDate{{ f.fee_id }}">sdfs</label>
+                        </section>
+                    </div>
+                    {% if f.paid_id > 0 %}
+                    <input type="button" class="addFeeBtn" value="submit" onclick="updateFee({{ f.paid_id }}, {{ f.fee_id }})">
+                        {% else %}
+                        <input type="button" class="addFeeBtn" value="submit" onclick="addFee({{ f.fee_id }})">
+                    {% endif %}
+
+                </div>
+            {% endfor %}
+
+
+
+        </div>
+    </div>
+    <script src="/static/script/fees/studentpaid.js"></script>
+{%  endblock %}
+{#<div>#}
+{#Student name : {{ stu.0.name }}  {{ stu.0.adm_no }}<br>#}
+{#{% csrf_token %}#}
+{#    {% for f in fee %}#}
+{##}
+{#    <section>#}
+{#        {{ f.fee_name }} fee <br>#}
+{#        {% if f.due_date  %}#}
+{#        Due : {{ f.due_date }} <br>#}
+{#        {% endif %}#}
+{#        paid amount : {{ f.paid }}  balance : {{ f.balance }} Total amount : {{ f.fee_amount }} <br>#}
+{#        to pay : <input type="text" id="fee{{ f.fee_id  }}"> <br>#}
+{#        paid date : <input type="date" id="date{{ f.fee_id  }}"> <br>#}
+{#        {% if f.paid_id > 0 %}#}
+{#        <input type="button" value="submit" onclick="updateFee({{ f.paid_id }}, {{ f.fee_id }})">#}
+{#            {% else %}#}
+{#            <input type="button" value="submit" onclick="addFee({{ f.fee_id }})">#}
+{#        {% endif %}#}
+{#    </section><br><br>#}
+{#    {% endfor %}#}
+{##}
+{#</div>#}
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+    resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 ) ;
+    function addFee(id) {
+        const amount = document.getElementById(`fee${id}`).value ,
+            stuId = document.getElementById('stu').value ;
+        let date = document.getElementById(`date${id}`).value ;
+        if(amount != "" && !isNaN(amount)){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "",
+                data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+                feeId: id, amount: amount, stu: stuId, date: date, swift: 1 },
+                success: function (result) {
+                    console.log(result) ;
+                    try {
+                        let data = JSON.parse(resJson(result))[0] ;
+                        if(data == "s"){
+                           console.log("SUCCESS") ;
+                        }
+                    }catch (e) {
+                        console.log(e) ;
+                    }
+                },
+                error: function (jqXHR, exception, responseText) {
+                    console.log(jqXHR, exception, responseText) ;
+                }
+            }) ;
+        }
+    }
+
+
+    function updateFee(paidId, feeId) {
+        const amount = document.getElementById(`fee${feeId}`).value ;
+        let date = document.getElementById(`date${feeId}`).value ;
+
+
+        if(amount != "" && !isNaN(amount)){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "",
+                data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+                paidId: paidId, amount: amount, date: date, swift: 2 },
+                success: function (result) {
+                    console.log(result) ;
+                    try {
+                        let data = JSON.parse(resJson(result))[0] ;
+                        console.log(data) ;
+                        if(data == "s"){
+                            console.log("SUCESS") ;
+                        }
+                    }catch (e) {
+                        console.log("ERROR") ;
+                    }
+                },
+                error: function (jqXHR, exception, responseText) {
+                    console.log(jqXHR, exception, responseText) ;
+                }
+            }) ;
+        }
+    }
+
+</script>

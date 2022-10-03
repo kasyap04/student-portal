@@ -1,0 +1,70 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+    <title>Profile - {{ stu.name }} {{ stu.adm_no }} | Don Bosco Collage Mampetta</title>
+<link rel="stylesheet" href="/static/style/student/profile.css">
+<link rel="stylesheet" href="/static/style/student/profile_admin.css">
+    <div class="middle-cont innerCont"> <input type="hidden" value="{{ stu.stu_id }}" id="stu">
+        <header class="middle-header"> <b>Profile</b></header>
+        <div class="middle-inner-cont profill-admin">
+
+            <div class="profile-conts">
+                <div class="profile-picName-cont">
+                    <section class="profile-picName-left">
+                        <article class="profile-pic-cont"> <img src="/static/{{ stu.image }}"> </article>
+                        <article class="profile-name-cont">{{ stu.name }}</article>
+                        <article class="profile-name-admno">{{ stu.adm_no }}</article>
+                    </section>
+
+                    <section class="profile-picName-right">
+                        <article >
+                            <span>{{ stu.dep }}</span>
+                            <span>Department</span>
+                        </article>
+                        <article>
+                            <span>{{ stu.current_sem }}</span>
+                            <span>Semester</span>
+                        </article>
+                        <article>
+                            <span>{{ stu.academic_years }}</span>
+                            <span>Academic year</span>
+                        </article>
+                    </section>
+                </div>
+
+                <div class="profile-contactDetails-cont">
+                    <section class="profile-contactDetails">
+                        <article><i class="fas fa-at"></i> {{ stu.email }}</article>
+                        <article><i class="fas fa-phone-alt"></i> {{ stu.phone }}</article>
+                        <article><i class="fas fa-calendar-day"></i> {{ stu.dob }}</article>
+                    </section>
+                </div>
+            </div>
+
+            <div class="students-action-cont">
+                <header class="profile-cont-headers">Settings</header>
+                <a href="/student/edit?stuid={{ stu.stu_id }}"> <article><i class="fas fa-edit"></i> Edit profile</article> </a>
+                <a> <article onclick="openSemCountProfile(event, {{ stu.dep_id }}, {{ stu.dep_dur }})"><i class="fas fa-hand-holding-usd"></i> Update fee</article> </a>
+                <a href="/notifications/add?stu={{ stu.stu_id }}"> <article><i class="fas fa-bell"></i> Send notification</article> </a>
+                <a> <article onclick="openChangePassCount()"><i class="fas fa-lock"></i> Change password</article> </a>
+            </div>
+
+        </div>
+
+        <div class="change-pass-outer"> {% csrf_token %}
+            <div class="change-pass-cont">
+                <header>Change password <i class="fas fa-times" onclick="closeChangePassCount()"></i></header>
+                <section>
+                    <article class="newPassword-arti"> <input type="password" id="newPassword" placeholder="Create new password for {{ stu.name }}"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                    <label class="newPassword-label">fsdf</label>
+                    <article class="newPassCopy-arti"> <input type="password" id="newPassCopy" placeholder="Retype new password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                    <label class="newPassCopy-label">fsdf</label>
+                </section>
+                <section class="changepass-btn-cont"> <button id="changePassword">Change</button></section>
+            </div>
+        </div>
+
+    </div>
+
+
+<script src="/static/script/student/profile_notstudent.js"></script>
+{% endblock %}

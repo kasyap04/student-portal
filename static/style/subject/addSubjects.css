@@ -1,0 +1,82 @@
+.department-cont{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+.department-cont section{
+    text-align: center;
+    padding: 20px;
+}
+
+.department-cont section article:nth-child(1){
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.1em;
+}
+
+.department-cont section article:nth-child(2){
+    color: grey;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.add-subject-cont1, .add-subject-cont2, .add-subject-cont3{
+    width: 430px;
+    margin-top: 20px;
+
+}
+
+.add-subject-cont2, .add-subject-cont3{
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-sub {
+    display: grid;
+}
+
+.add-sub span{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.add-sub input, .add-sub select{
+    padding: 15px;
+    outline: none;
+    border: 1px solid var(--borderColor2);
+    border-radius: 5px;
+}
+
+.add-sub input:focus, .add-sub select:focus{
+    background-color: rgba(173, 216, 230, 0.07);
+}
+
+.add-sub label{
+    font-size: 0.7em;
+    color: red;
+    display: none;
+}
+
+.addSubBtn{
+    width: 430px;
+    padding: 14px;
+    margin-top: 40px;
+    background-color: #24638f;
+    color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #24638f;
+    font-size: 1.05em;
+}
+
+#addSubYear{
+    width: 180px;
+}
+
+#addSubTeacher{
+    width: 185px;
+}

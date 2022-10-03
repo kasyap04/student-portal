@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{#    <title>Teacher @DonBosco Collage</title>#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='Cache-Control' content='no-cache, must-revalidate'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Expires' content='0'>
+    <link rel="icon" type="image/x-icon" href="/static/images/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+    <link rel="stylesheet" href="/static/style/base.css">
+    <link rel="stylesheet" href="/static/style/teacher/teacher.css">
+    <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="/static/script/base.js"></script>
+</head>
+<body>{% csrf_token %}
+    <header class="main-header">
+        <div class="page-name-cont">
+            <div class="header-icon-cont"></div>
+            <span class="header-name">
+                <h2>Students Portal</h2>
+            </span>
+        </div>
+    </header>
+
+    <main class="main-body">
+
+        <div class="main-body-left">
+            <div class="main-body-left-cont1">
+                <div class="teacher-profile-cont">
+                    <section class="teacher-profile-top">
+                        <section class="teacher-profile-img-cont"> <i class="fas fa-user-circle"></i> </section>
+                        <section class="teacher-profile-name-cont"><b id="myname"></b></section>
+                    </section>
+                    <section class="teacher-profile-bottom" id="lastlogin"></section>
+                </div>
+                <nav class="student-nav-cont">
+                    <a href="/temp/teacher/"><article class="nav-item selectedNav"><i class="fas fa-home"></i> Home</article></a>
+                    <a href="" id="addattendenceLink"><article class="nav-item"><i class="far fa-calendar-check"></i> Attendence</article></a>
+                    <a href="/complaints/view"><article class="nav-item" id="comaplaintsLink"><i class="fas fa-envelope-open-text"></i> Complaints</article></a>
+                    <a><article class="nav-item" onclick="openChangePassCount()"><i class="fas fa-lock"></i>Change password</article></a>
+                    <a><article class="nav-item" onclick="openLogoutCont()"><i class="fas fa-sign-out-alt"></i>Logout</article></a>
+                </nav>
+            </div>
+            <div class="main-body-left-cont2">
+                <div id="t_pos">
+
+                </div>
+                <section class="contactDetails-cont">
+                    <header class="left-cont2-header">Contact details</header>
+                    <section class="contactDetails-cont-inner">
+                        <article><i class="fas fa-phone-alt"></i> <label id="phone"></label></article>
+                        <article><i class="fas fa-at"></i> <label id="email"></label></article>
+                    </section>
+                </section>
+            </div>
+
+        </div>
+
+        <div class="main-body-middle">
+            {% block teachers %}
+                <title>{{ my_name }} - Teacher | Don Bosco Collage Mampetta</title>
+                <div class="middle-cont innerCont">
+                    <header class="middle-header"> <b>Your subjects</b> </header>
+                    <div class="middle-inner-cont">
+                        <div class="subjects-list-cont">
+                            {% for i in sub %}
+                            <section class="subject-list">
+                                <article class="subject-list-top"> <a href="/classroom/viewclassroom?sub={{ i.sub_id }}">{{ i.name }} ({{ i.code }})</a> </article>
+                                <article class="subject-list-bottom">
+                                    <span>{{ i.dep }} {{ i.sem }}</span>
+                                    <span><i class="fas fa-ellipsis-v" onclick="showMenuItems({{ i.sub_id }}, this, event)"></i></span>
+                                </article>
+                            </section>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+
+        <div class="main-body-right">
+            <div class="left-cont innerCont">
+                    <header class="left-header"> <b>Upcoming events</b> </header>
+                    <div class="left-inner-cont">
+                        {% if events %}
+                        {% for e in events %}
+                            <section class="event-list-cont">
+                               <article class="event-date"> <span>{{ e.date }}</span> <span>{{ e.left }}</span> </article>
+                               <article class="event-name">{{ e.body }}</article>
+                           </section>
+                        {% endfor %}
+                        {% else %}
+                            <article class="no-content-cont">No upcoming events</article>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+
+        {% block complaints %}
+        {% endblock %}
+
+    </main>
+
+    <div class="menu-cont">
+        <a href="" id="notifLink"> <article><i class="fas fa-bell"></i> Send notification</article></a>
+        <a href="" id="internalLink"> <article><i class="far fa-chart-bar"></i> Add exam marks</article></a>
+        <a href="" id="editInternalLink"> <article><i class="fas fa-edit"></i> Edit exam marks</article></a>
+    </div>
+
+    <div class="logut-outer">
+        <div class="logout-cont">
+            <section>Are you sure you want to logout?</section>
+            <section>
+                <button onclick="closeLogoutCont()">Not now</button>
+                <button onclick="logout()">Logout</button>
+            </section>
+        </div>
+    </div>
+
+    <div class="lineMsg-cont">Its a single line message</div>
+
+    <div class='loading-outer'>
+        <div class='loadingCont'>
+            <div class="loading-icon" id="loadingIcon">
+                <div class='clock1'>
+                    <div class='big-one'></div>
+                </div>
+                <div class='clock2'>
+                    <div class='small-one'></div>
+                </div>
+                <label>Loading..</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="sel-sem-outer">
+        <div class="sel-sem-cout" data-dep="">
+            <header><label>Select semester</label> <i class="fas fa-times" onclick="closeSelectSem()"></i></header>
+            <article onclick="gotoAttendence(1)">1</article>
+            <article onclick="gotoAttendence(2)">2</article>
+            <article onclick="gotoAttendence(3)">3</article>
+            <article onclick="gotoAttendence(4)">4</article>
+            <article onclick="gotoAttendence(5)">5</article>
+            <article onclick="gotoAttendence(6)">6</article>
+        </div>
+    </div>
+
+    <div class="change-pass-outer"> {% csrf_token %}
+        <div class="change-pass-cont">
+            <header>Change password <i class="fas fa-times" onclick="closeChangePassCount()"></i></header>
+            <section>
+                <article class="oldPassword-arti"> <input type="password" id="oldPassword" placeholder="Enter your password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                <label class="oldPassword-label"></label>
+                <article class="newPassword-arti" style="margin-top: 20px"> <input type="password" id="newPassword" placeholder="Choose new password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                <label class="newPassword-label"></label>
+                <article class="newPassCopy-arti"> <input type="password" id="newPassCopy" placeholder="Retype new password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                <label class="newPassCopy-label"></label>
+            </section>
+            <section class="changepass-btn-cont"> <button id="forgotPassBtn">Forgot password?</button> <button id="changePassword">Change</button></section>
+        </div>
+    </div>
+
+        <div class="opt-outer">
+            <div class="otp-number-cont changePassword-cont">
+                <b>Verify Number</b>
+                <article>Enter your registered mobile number</article>
+                <input type="text" id="mobileNumber" autocomplete="off">
+                <label>sdf</label>
+                <button onclick="verifyMobileNumber()">VERIFY</button>
+            </div>
+            <div class="otp-cont changePassword-cont">
+                <b>Verify OTP</b>
+                <article>We've send an OTP to the number <br> <span id="numberForOTP"></span> </article>
+                <input type="text" maxlength="6" id="otp" autocomplete="off">
+                <label>sdf</label>
+                <button onclick="verifyOTP()">VERIFY</button>
+            </div>
+            <div class="password-cont">
+                <header><b>Change password</b></header>
+                <article class="login-input pass"> <input type="password" id="pass1" placeholder="Create password" > <article class="login-passshow-btn" data-show="false" onclick="togglePassword(this)">show</article> </article>
+                <label class="forgotPassLabel1"></label>
+                <article class="login-input pass"> <input type="password" id="pass2" placeholder="Re-type password"> <article class="login-passshow-btn" data-show="false" onclick="togglePassword(this)">show</article> </article>
+                <label class="forgotPassLabel2"></label>
+                <button onclick="changeForgotPassword()">Change password</button>
+            </div>
+        </div>
+
+    <script src="/static/script/teacher/teacher.js"></script>
+    <script src="/static/script/base.js"></script>
+</body>
+</html>

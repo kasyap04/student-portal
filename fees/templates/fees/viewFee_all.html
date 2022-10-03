@@ -1,0 +1,99 @@
+{% extends 'temp/student.html' %}
+
+
+{% block base %}
+    <title>Fees | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/fees/fees.css">
+    <div class="classwork-cont">
+        <header class="middleCont-header"><b>Fees</b> </header>
+        <div class="classwork-inner-cont">
+            <section class="sudentfee-outer">
+                {% if stu_fee %}
+                    {% for f in stu_fee %}
+                <table border="0" cellspacing="0" cellpadding="10">
+                    <thead>Semester {{ f.sem }}</thead>
+                    <tr>
+                        <th>Fee name</th>
+                        <th>Amount</th>
+                        <th>Paid</th>
+                        <th>Balance</th>
+                        <th>Paid date</th>
+                        <th>Due date</th>
+                    </tr>
+                    {% for fees in f.fee %}
+                    <tr>
+                        <td><b>{{ fees.fee_name }} Fee</b></td>
+                        <td>{{ fees.fee_amount }}</td>
+                        <td> {% if fees.paid_amount %} {{ fees.paid_amount }} {% else %} 0 {% endif %}</td>
+                        <td> {% if fees.balance or fees.balance == 0 %} {{ fees.balance }} {% else %} {{ fees.fee_amount }} {% endif %}</td>
+                        <td> {% if fees.paid_date %} {{ fees.paid_date }} {% else %} <label style="color: grey; font-size: 0.9em">Null</label>{% endif %} </td>
+                        <td> {% if not fees.due_date  %} <label style="color: grey; font-size: 0.9em">Null</label> {% else %} {{ fees.due_date }} {% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </table><br><br>
+                    {% endfor %}
+                {% endif %}
+            </section>
+        </div>
+    </div>
+
+<script>
+'use-strict'
+for (var i = 0; i < document.getElementsByClassName('student-nav-cont')[0].children.length; i++){
+    document.getElementsByClassName('student-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+}
+
+document.getElementsByClassName('student-nav-cont')[0].children[3].children[0].classList.add('selectedNav') ;
+
+
+</script>
+{% endblock %}
+
+<div>
+    <section>
+        {% for f in stu_fee %}
+            <article>
+            Fee name : {{ f.fee_name }}<br>
+            Amount : {{ f.fee_amount }}<br>
+            {% if f.due_date != "null" %}
+                Due : {{ f.due_date }}<br>
+            {% endif %}
+
+            {% if f.s_paid_amount %}
+                You paid : {{ f.s_paid_amount }}<br>
+                Balance : {{ f.s_balance }}<br>
+                date : {{ f.s_paid_date }}
+            {% endif %}
+
+
+            </article><br>
+        {% endfor %}
+    </section>
+
+    <section>
+        {% if students %}
+            {% for s in students %}
+            <article>
+            Student name : {{ s.name }} {{ s.adm_no }}<br>
+            {% if s.status == "paid" %}
+                {% for d in s.paid_details %}
+                    Fee name : {{ d.name }}<br>
+                    Total : {{ d.fee_amount }}<br>
+                    Paid : {{ d.paid }}<br>
+                    Balance : {{ d.balance }}<br>
+                    Date : {{ d.date }}<br>
+                {% endfor %}
+
+            {% else %}
+                status : {{ s.status  }}
+            {% endif %}
+            </article><br>
+            {% endfor %}
+                    
+        {% endif %}
+    </section>
+
+</div>
+
+
+

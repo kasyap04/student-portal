@@ -1,0 +1,273 @@
+{% extends 'temp/classroom.html' %}
+
+{% block classroom %}
+    <title>{{ sub_details.sub_name }} - Classroom</title>
+            <section class="classroom-home-cont">
+
+                <article class="classroom-cont">
+                    <article class="classroom-course-name"> <b>{{ sub_details.sub_name }} ({{ sub_details.sub_code }})</b> </article>
+                    <article>
+                        {% if user == "student" %}
+                        <label>{{ sub_details.teacher_name }}</label>
+                            {% elif user == "teacher" or user == "principal" %}
+                            <label>{{ sub_details.dep_name }} {{ sub_details.sem }}</label>
+                            {% else %}
+                            <label>{{ sub_details.teacher_name }}</label>
+                            <label>{{ sub_details.dep_name }} {{ sub_details.sem }}</label>
+                        {% endif %}
+                    </article>
+                </article>
+
+                <div class="classroom-body">
+                    <section class="classroom-work-body forswitch">
+                    {% if user != "student" %}
+                        <input type="hidden" id="dep" value="{{ sub_details.dep_id }}">
+                        <input type="hidden" id="sem" value="{{ sub_details.sem }}">
+                        <input type="hidden" id="sub" value="{{ sub_details.sub_id }}">
+                        <div class="classroom-addClasswork-cont">
+                            <article class="addClasswork-defult" onclick="openAddClasswork()">
+                                <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                <span>Add classwork</span>
+                            </article>
+
+                            <section class="addClasswork-cont">
+                                <span>Add classwork</span>
+                                <div class="canvasAndIcons" style="padding: 10px">
+                                    <article> <label>Title</label> <input type="text" id="workTitle" placeholder="Eg: Assignment" autocomplete="off"> </article>
+                                    <article style="display: grid"> <label>Body</label> <textarea id="workBody"></textarea> </article>
+                                    <article>Due datetime <i class="fas fa-calendar-day"></i> <input type="date" id="workDate"> <i class="fas fa-hourglass-start"></i> <input type="time" id="workTime"></article>
+                                </div>
+                                <section class="addClasswork-btn-cont"> <button onclick="closeAddClasswork()">Cancel</button> <button onclick="submitClasswork()">Submit</button> </section>
+                            </section>
+                        </div>
+                        <script src="/static/script/teacher/addClasswork.js"></script>
+                    {% endif %}
+
+                        <form method="post" id="userShareForm" entype="multipart/form-data"> {% csrf_token %}
+                            <input type="hidden" name="sub" value="{{ sub_details.sub_id }}">
+                            <section class="classroom-userShare-cont">
+                            <article class="userShare-defult">
+                                <i class="fas fa-user-circle"></i> <span>Share something to your class</span>
+                            </article>
+
+                            <div class="userShare-cont">
+                                <span>Share something to your class</span>
+                                <div class="canvasAndIcons">
+                                    <article class="userSharecontent" id="userShareBody" spellcheck="true" contenteditable>
+
+                                    </article>
+                                    <textarea name="userShareBody" id="userShareBodyCopy" hidden></textarea>
+                                </div>
+                                <div id="linkAttachments"></div>
+                                <div id="mediaAttachments"></div>
+                                <div class="addAttachmentsCont">
+                                    <header>Upload file <i class="fas fa-times" onclick="closeUploadFileUserShare()"></i></header>
+                                    <section id="addAttachments"> </section>
+                                </div>
+
+                                <article class="button-cont">
+                                    <div>
+                                        <i class="fas fa-paperclip" title="Add attachments" id="addAttachmentBtn" onclick="openUploadFileUserShare()"></i>
+                                        <i class="fas fa-link" title="Add links" onclick="openAddLink()"></i>
+                                    </div>
+                                    <div>
+                                        <button id="btnCancelUserShare" onclick="return false;">Cancel</button>
+                                        <input type="submit" value="Submit" id="btnSubmitUserShare" >
+                                    </div>
+                                </article>
+                            </div>
+                                <div class="classroom-loading-cont">
+                                    <section class="classroom-loading-before">
+                                        <header>Uploading...</header>
+                                        <section class="classroom-loading-inner">
+                                            <article id="loadinPercentage">10% </article>
+                                            <div class="classroom-loading-track">
+                                                <div class="classroom-loading-bar"></div>
+                                            </div>
+                                        </section>
+                                    </section>
+                                    <section class="classroom-loading-after">
+                                        <article> <span style="color: black">Completed</span> <i class="fas fa-check-circle"></i> </article>
+                                    </section>
+                                </div>
+                        </section>
+                        </form>
+
+                        {% for c in classroom %}
+
+                            {% if c.context == "usershare" %}
+
+
+                        <section class="classroom-items-cont">
+                            <header>
+                                <div>
+                                    <section class="classroom-head-icon" style="background-color: #fff;"> <i class="fas fa-user-circle"></i> </section>
+                                    <article>
+                                        <span class="classroom-postBy">{{ c.share_name }}</span> <br>
+                                        <span class="classroom-postTime">{{ c.share_date }}</span>
+                                    </article>
+                                </div>
+                                {% if c.attachments > 0 %}<i class="fas fa-chevron-down" data-mediaOpen="false" onclick="openClassroomMediaItems(this)"></i>{% endif %}
+                            </header>
+                            <article class="classroom-item-body">
+                                {{ c.share_body }}
+                            </article>
+                            <article class="classroom-media-cont">
+
+                                {% for att in c.share_medias %}
+                                    <a href="/static/uploads/{{ att.name }}" target="_blank"><div class="media-items">
+                                        <section class="media-image-cont">
+                                            <i class="fas fa-file-alt"></i>
+                                        </section>
+                                        <section class="media-body-cont">
+                                            <article> {{ att.name }}</article>
+                                            <article>{{ att.ext  }}</article>
+                                        </section>
+                                    </div></a>
+
+                                {% endfor %}
+
+                                {% if c.links %}
+                                {% for link in c.links %}
+                                <a href="{{ link.url }}" target="_blank"><div class="media-items">
+                                    <section class="media-image-cont">
+                                        <img src='http://www.google.com/s2/favicons?domain={{ link.url }}' />
+                                    </section>
+                                    <section class="media-body-cont">
+                                        <article> {{ link.url }}</article>
+                                        <article>Website</article>
+                                    </section>
+                                </div></a>
+                                {% endfor %}
+
+                                {% endif %}
+
+
+
+                            </article>
+                            {% if c.attachments > 0 %}<article class="classroom-item-bottom">{{ c.attachments }} attachments</article>{% endif %}
+                        </section>
+                                {% elif c.context == "classwork" %}
+
+                                <a class="classwork-a" href="/classroom/submit?work={{ c.context_id }}"><section class="classroom-work-cont">
+                                    <header>
+                                        <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                        <article>
+                                            <span class="classroom-postBy"> <b> {{ c.teacher_name }} posted a {{ c.work_title }}: <label>{{ c.work_body }}</label>  </b></span> <br>
+                                            <span class="classroom-postTime">{{ c.work_date }}</span>
+                                        </article>
+                                    </header>
+                                </section></a>
+
+                            {% endif %}
+
+                        {% endfor %}
+                    </section>
+                    <section class="classwork-works-cont forswitch">
+                {% for c in classroom %}
+                    {% if c.context == "classwork" %}
+                                <a href="submit?work={{ c.context_id }}"> <div class="classwork-item">
+                                    <div class="classwork-item-align align-left">
+                                        <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                        <section class="classwork-work-body">
+                                            <article class="textOverDots"> <b>{{ c.work_title }} : </b> {{ c.work_body }}</article>
+                                            <article class="classroom-postTime">{{ c.work_date }}</article>
+                                        </section>
+                                    </div>
+
+                                    <div class="classwork-item-align align-right">
+                                        <section class="classwork-work-due">{{ c.work_due_date }}, {{ c.work_due_time }}</section>
+                                        <section class="classwork-work-status">
+                                            {% if c.work_submited_status1 == "Missing" %}
+                                                <span style="color: red">{{ c.work_submited_status1 }}</span>
+                                                {% else %}
+                                                <span>{{ c.work_submited_status1 }}</span>
+                                                <span>{{ c.work_submited_status2 }}</span>
+                                            {% endif %}
+                                        </section>
+                                    </div>
+                                </div></a>
+                    {% endif %}
+                {% endfor %}
+                            </section>
+                    <section class="classroom-student-cont forswitch">
+                        {% if user == "principal" %}
+                            {% for s in student %}
+                            <a href="/student/profile?stu={{ s.stu_id }}"><section class="student-list-cont">
+                                <section>
+                                    <article class="student-image-cont"> <img src="/static/{{ s.image }}"> </article>
+                                    <article class="student-admno">{{ s.adm_no }}</article>
+                                    <article class="student-name">{{ s.name }}</article>
+                                </section>
+                            </section></a>
+                            {% endfor %}
+                            {% else %}
+                            {% for s in student %}
+                            <section class="student-list-cont">
+                                <section>
+                                    <article class="student-image-cont"> <img src="/static/{{ s.image }}"> </article>
+                                    <article class="student-admno">{{ s.adm_no }}</article>
+                                    <article class="student-name">{{ s.name }}</article>
+                                </section>
+                                {% if user == "teacher" %}
+                                    <i class="fas fa-ellipsis-v" onclick="openSendNotifCount(this, event, {{ s.stu_id }})"></i>
+                                {% endif %}
+                            </section>
+                            {% endfor %}
+                        {% endif %}
+                    </section>
+                </div>
+
+
+
+
+            </section>
+
+
+    <div class="menu-cont">
+        <a href=""><article><i class="fas fa-bell"></i> Send notification</article></a>
+    </div>
+
+    <div class="addLink-outter">
+            <div class="addLink-cont popup">
+                <header> <span>Add link</span> </header>
+                <input type="text" id="inpAddLink" placeholder=" " autocomplete="off">
+                <label class="addLink-placeholder">Add link here</label>
+                <section class="addLink-btn-cont">
+                    <button id="btnCloseAddLink">Cancel</button>
+                    <button id="btnAddLink">Add</button>
+                </section>
+            </div>
+        </div>
+
+{% endblock %}
+
+{#<div>#}
+{##}
+{#    {% for c in classroom %}#}
+{#    {% if c.context == "classwork" %}#}
+{#    <section data-workId="{{ c.context_id }}">#}
+{#        title : {% if user == "teacher" %}#}
+{#        You#}
+{#        {% endif %} post a {{ c.work_title }} : {{ c.work_body }} <br>#}
+{#        date : {{ c.work_date }} <br>#}
+{##}
+{#    </section><br><br>#}
+{#        {% elif c.context == "usershare" %}#}
+{#        <section>#}
+{#        share by: {{ c.share_name }} <br>#}
+{#        time : {{ c.share_date }} <br>#}
+{#        body: {{ c.share_body }} <br>#}
+{#        <section>#}
+{#            arrachments<br>#}
+{#            {% for att in c.share_medias %}#}
+{##}
+{#            <article>{{ att.name }}</article>#}
+{#            {% endfor %}#}
+{#        </section>#}
+{#    </section><br><br>#}
+{##}
+{#    {% endif %}#}
+{#    {% endfor %}#}
+{##}
+{#</div>#}

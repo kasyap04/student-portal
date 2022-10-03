@@ -1,0 +1,116 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+    <title>Add Academic Fee | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/fees/addfee.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Add academic fees</b> </header>
+            <div class="middle-inner-cont add-fees">
+
+                <div class="add-fee-cout">
+                    <section class="add-fee-sections addFee-dep">
+                        <span>Department</span>
+                        <select id="addFeeDep">
+                            <option value=""></option>
+                            {% for i in dep %}
+                            <option value="{{ i.dep_id }}">{{ i.short_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <label id="affFeeErr0">sdfsd</label>
+                    </section>
+                    <section class="add-fee-sections addFee-sem">
+                        <span>Semester</span>
+                        <select id="addFeeSem">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <label id="affFeeErr1">fg</label>
+                    </section>
+                </div>
+
+                <div class="add-fee-cout">
+                    <section class="add-fee-sections addFee-amount">
+                        <span>Fee amount</span>
+                        <input type="text" id="addFeeamount">
+                        <label id="affFeeErr2">sdf</label>
+                    </section>
+                    <section class="add-fee-sections addFee-type">
+                        <span>Fee name</span>
+                        <input type="text" id="addFeeName" placeholder="eg: Sem / Exam">
+                        <label id="affFeeErr3">sdf</label>
+                    </section>
+                    <section class="add-fee-sections addFee-due">
+                        <span>Due date</span>
+                        <input type="date" id="addFeeDue">
+                        <label id="affFeeErr4">sdf</label>
+                    </section>
+                </div>
+
+                <div class="addFee-btn-cont">
+                    <button onclick="clearFields()">Clear</button>
+                    <button onclick="postFees()">Add fee</button>
+                </div>
+
+            </div>
+    </div>
+    <script src="/static/script/fees/addfee.js"></script>
+{% endblock %}
+
+        <h1 align="center">ADD FEE</h1>
+            <form id="feeForm">
+                {% csrf_token %}
+                Department : <select name="dep" id="dep">
+                    <option value=""></option>
+                {% for i in dep %}
+                <option value="{{ i.dep_id }}">{{ i.short_name }}</option>
+                {% endfor %}
+                </select> <br>
+                Semester : <select name="sem" id="sem">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select> <br>
+                Fees : <input type="text" name="fee" id="fee"> <br>
+                Fee type : <input type="text" name="type" id="type"><br>
+                Due date : <input type="date" name="due" id="due"> <br>
+            </form>
+                <input type="button" value="SUBMIT" onclick="postFees()">
+
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+    resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 ) ;
+
+    function postFees() {
+
+        let dep = document.getElementById('dep').value,
+            sem = document.getElementById('sem').value,
+            fee = document.getElementById('fee').value,
+            type = document.getElementById('type').value,
+            due = document.getElementById('due').value ;
+        if(dep != "" && sem != "" && fee != "" && type != ""){
+            $.ajax({
+            cache: false,
+            type: "POST",
+            url: "postfee",
+            data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(), dep: dep, sem: sem, fee: fee, type: type, due: due},
+            success: function (result) {
+                console.log(result) ;
+                let data = JSON.parse(resJson(result))[0] ;
+                if(data == "s"){
+                    document.getElementById('feeForm').reset() ;
+                }
+            },
+            error: function (jqXHR, exception, responseText) {
+                console.log(jqXHR, exception, responseText) ;
+            }
+        }) ;
+        }
+
+    }
+
+
+    </script>

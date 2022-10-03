@@ -1,0 +1,33 @@
+.lineMsg-cont{
+    position: fixed;
+    background-color: black;
+    padding: 10px;
+    top: 100px;
+    color: #fff;
+}
+
+.err-msg{
+    position: absolute;
+    padding: 10px;
+    background: #615d5a;
+    /* top: 396px; */
+    z-index: 11;
+    color: #ffffff;
+    left: 50px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px 0 #706e6e;
+    text-align: center;
+    display: none;
+}
+
+.err-msg::before{
+    position: absolute;
+    content: "";
+    background: #615d5a;
+    height: 10px;
+    width: 10px;
+    z-index: 7;
+    bottom: -4px;
+    left: calc(50% - 5px);
+    transform: rotate(45deg);
+}

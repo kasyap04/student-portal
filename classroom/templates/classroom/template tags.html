@@ -1,0 +1,62 @@
+
+<div >
+    subject : {{ classwork.sub_name }} <br>
+    teacher : {{ classwork.teacher_name }} <br>
+    Date : {{ classwork.date }} <br>
+    due : {{ classwork.due_date }} {{ classwork.due_time }}<br>
+    Title: {{ classwork.title }} <br>
+    Body : {{ classwork.body }}<br><br>
+    <form method="post" entype="multipart/form-data" id="submitWorkForm">
+    {% csrf_token %}
+    <input type="hidden" id="workid" name="workid" value="{{ classwork.work_id }}"><br>
+    <section id="attachmentCont">
+        {% if submited %}
+        submited : {{ submited.date }} {{ submited.time }} <br>
+            {% for m in submited.medias %}
+            <article data-submitId="{{ submited.submit_id }}"> {{ m.name }} </article>
+            {% endfor %}
+
+            {% else %}
+            {% if not students and not workdone %}
+            <input type="file" id="submitFile0" name="submitFile0" onclick="createAttchmentButton()">
+            {% endif %}
+        {% endif %}
+ </section>
+    <section id="submitBtnCont">
+    {% if not submited and not students and not workdone %}
+     <input type="submit" value="submit">
+    {% endif %}
+    </section>
+    </form>
+
+{% if workdone %}
+    Student : {{ workdone.name }} {{ workdone.adm_no }} <br>
+    submited on : {{ workdone.date }} {{ workdone.time }} <br>
+    {% for m in workdone.medias %}
+    <article>{{ m.name }}</article>
+    {% endfor %}
+
+{% endif %}
+
+{% if students %}
+    {% for s in students %}
+        <article data-stuId="{{ s.stu_id }}">{{ s.name }}  {{ s.adm_no }}
+        {% if s.status == "submited" %}
+        {{ s.date }} {{ s.time }} {{ s.remark }}
+            {% else %}
+            {{ s.status }}
+        {% endif %}
+        </article>
+    {% endfor %}
+
+{% endif %}
+
+{% if submited %}
+<button onclick="unsubmitWork({{ classwork.work_id }}, this)">unsubmit</button>
+{% endif %}
+
+</div>
+
+
+
+<article class="chooseFile-btn-cont"> <article>BROWSE</article> <input type="file"> </article>

@@ -1,0 +1,272 @@
+/*******************************STUDENTS PART*******************************/
+
+.complaint-history-cont{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 10px;
+    /*display: none;*/
+}
+
+.complaint-new-cont{
+    display: none;
+}
+
+.createComplaintBtn-cont{
+    margin-bottom: 20px;
+    text-align: end;
+}
+
+.fa-plus{
+    color: #24638f ;
+    margin-right: 2px;
+}
+
+.createComplaintBtn-cont button{
+    border: 2px solid #24638f;
+    background:none ;
+    padding: 10px;
+}
+
+.complaint-box-cont{
+    /*height: 105px;*/
+    width: calc(100% - 20px);
+    background-color: rgba(211, 211, 211, 0.44);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.complaint-to{
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.complaint-to label{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.complaint-to b{
+    text-transform: capitalize;
+}
+
+.complaint-body{
+    height: 55px;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.complaint-reply-cont{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.complaint-reply-cont article:nth-child(1){
+    font-size: 0.7em;
+    color: grey;
+    margin-bottom: 5px;
+}
+
+.complaint-box-bottom{
+    font-size: 0.75em;
+    color: gray;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+.complain-fileto{
+    display: flex;
+}
+
+.complain-fileto label, .complain-create-cont label{
+    color: grey;
+    font-size: 0.9em;
+}
+
+.complain-create-cont{
+    display: grid;
+    margin-top: 20px;
+}
+
+#complaintbody{
+    height: 100px;
+    padding: 10px;
+    resize: none;
+}
+
+#complaintbody:focus{
+    background-color: rgba(173, 216, 230, 0.15);
+}
+
+.complaint-err{
+    font-size: 0.8em;
+    color: red;
+    font-weight: bold;
+    display: none;
+}
+
+.complain-btn-cont{
+    text-align: end;
+    margin-top: 20px;
+}
+
+.complain-btn-cont button{
+    padding: 10px;
+    width: 80px;
+    outline: none;
+    border: none;
+    background: none;
+}
+
+#complaintCancelBtn{
+    color: grey
+}
+
+.complain-btn-cont button:nth-child(2){
+    font-weight: bold;
+}
+
+#complantCharCount{
+    text-align: end;
+    font-size: 0.8em;
+    color: grey;
+    margin-top: 3px;
+}
+
+#complaintFrom{
+    margin-left: 10px;
+}
+
+
+/*******************************TEACHER OR PRINCIPAL PART*******************************/
+
+.main-body-middle{
+   /*width: calc(100% - 860px);*/
+   width: calc(100% - 260px);
+}
+
+.main-body-right{
+    display: none;
+    background-color: lightgray;
+}
+
+.complaints-cont-left{
+    width: 590px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-left: 5px;
+    padding: 10px;
+    display: none;
+    height: fit-content;
+}
+
+.complaint-list-cont a{
+    color: #000000;
+    text-decoration: none;
+}
+.complaint-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px 0;
+    border-bottom: 1px solid var(--borderColor) ;
+}
+
+.complaint-list:hover{
+    background-color: rgba(180, 224, 238, 0.09);
+    border-radius: 10px;
+}
+
+.selected{
+    background-color: rgba(180, 224, 238, 0.25);
+    border-radius: 10px;
+}
+
+.complaint-sendby{
+    display: grid;
+    width: 170px;
+}
+
+.complaint-sendby span:nth-child(2){
+    color: grey;
+    font-size: 0.8em;
+}
+
+.complaint-dep{
+    width: 70px;
+    font-size: 0.9em;
+}
+
+.complaint-date{
+    width: 200px;
+    font-size: 0.9em;
+}
+
+.complaint-status{
+    font-size: 0.8em;
+    color: grey;
+    width: 40px;
+    text-align: end;
+}
+
+.complaints-body{
+    margin-top: 20px;
+    background-color: rgba(173, 216, 230, 0.07);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.no-complaints{
+    text-align: center;
+    font-size: 0.8em;
+    color: grey;
+}
+
+.complaint-sendreply-cont{
+    display: grid;
+    margin-top: 30px;
+    border-top: 1px solid var(--borderColor);
+    padding-top: 20px;
+}
+
+.complaint-sendreply-cont header{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.complaint-sendreply-cont input{
+    padding: 10px;
+    border: 1px solid var(--borderColor2);
+    margin-top: 5px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.reply-err{
+    font-size: 0.8em;
+    color: red;
+    display: none;
+}
+
+.complaint-sendreply-cont button{
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #24638f;
+    border: 1px solid #24638f;
+    color: #ffffff;
+    margin-bottom: 10px;
+}

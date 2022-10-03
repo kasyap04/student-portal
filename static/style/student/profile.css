@@ -1,0 +1,447 @@
+.mainBody-middle{
+    width: calc(100% - 500px);
+}
+
+.mainBody-right{
+    display: block;
+    background-color: #ffffff;
+    height: calc(100vh - 70px);
+}
+
+.classwork-cont{
+    margin-top: 0;
+}
+
+.middleCont-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.fa-ellipsis-v{
+    font-size: 0.9em;
+    color: grey;
+}
+
+/*.classwork-inner-cont{*/
+    /*display: grid;*/
+    /*grid-gap: 5px;*/
+    /*grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));*/
+    /*grid-template-columns: auto auto;*/
+/*}*/
+
+.profile-conts{
+    display: flex;
+}
+
+.profile-picName-cont{
+    height: 150px;
+    width: fit-content;
+    background-color: #3395ad;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+.profile-picName-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    color: #ffffff;
+    /*width: 300px;*/
+    width: 150px;
+    border-right: 1px solid rgba(210, 210, 210, 0.56);
+}
+
+.profile-name-cont{
+    margin-top: 5px;
+    white-space: nowrap;
+}
+
+.profile-pic-cont img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.profile-pic-cont{
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    background-color: lightcoral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.profile-name-admno{
+    font-size: 0.9em;
+}
+
+
+.profile-picName-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 0 10px;
+}
+
+.profile-picName-right article{
+    display: grid;
+    height: fit-content;
+    text-align: center;
+    margin: 20px;
+}
+
+.profile-picName-right article span:nth-child(1){
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.profile-picName-right article span:nth-child(2){
+    font-size: 0.8em;
+    color: #e0e0e0;
+}
+
+
+.profile-contactDetails-cont, .profile-classwork-progress-cont{
+    /*border: 1px solid rgba(211, 211, 211, 0.25);*/
+    width: calc(100% - 420px);
+    /*width: calc(100% - 70px);*/
+    /*margin-left: 10px;*/
+    padding: 10px 20px 20px 20px;
+    border-radius: 10px;
+    background-color: rgba(211, 211, 211, 0.18);
+}
+
+.profile-classwork-progress-cont{
+    margin-left: 10px;
+}
+
+/*.profile-cont-headers{*/
+    /*color: grey;*/
+    /*padding-bottom: 5px;*/
+    /*border-bottom: 1px solid var(--borderColor);*/
+    /*margin-bottom: 10px;*/
+/*}*/
+
+.profile-contactDetails article{
+    padding: 7px 0;
+    display: flex;
+    /*align-items: center;*/
+}
+.profile-contactDetails article i{
+    color: var(--mainHeadingColor);
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.profile-classwork-progress-cont{
+    /*height: 200px;*/
+    /*width: 25%;*/
+    background-color: rgba(128, 137, 191, 0.08);
+    /*background-color: rgba(128, 137, 191, 0.82);*/
+}
+
+.profile-classwork-top{
+    display: flex;
+    /*justify-content: end;*/
+}
+
+.profile-classwork-top-left{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid var(--borderColor);
+}
+
+.profile-classwork-top-right{
+    width: 50%;
+    display: flex;
+    justify-content: end;
+}
+
+
+
+.circular{
+  height:100px;
+  width: 100px;
+  position: relative;
+}
+
+.circular .bar{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgb(235, 235, 235);
+  border-radius: 100%;
+  clip: rect(0px, 100px, 100px, 50px);
+}
+
+.circle .bar .progress{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 50px, 100px, 0px);
+  background: var(--mainHeadingColor);
+}
+
+.circle .left .progress{
+  /*z-index:1;*/
+  /*animation: left 4s linear both;*/
+}
+@keyframes left{
+  100%{
+    transform: rotate(180deg);
+  }
+}
+.circle .right {
+  transform: rotate(180deg);
+  /*z-index:3;*/
+
+}
+.circle .right .progress{
+  /*animation: right 4s linear both;*/
+  /*animation-delay:4s;*/
+}
+@keyframes right{
+  100%{
+    transform: rotate(180deg);
+  }
+}
+
+.circle2{
+    height: 80px;
+    width: 80px;
+    background-color: rgb(250, 251, 255);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-classwork-bottom{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 1px solid var(--borderColor);
+    padding-top: 20px;
+}
+
+.profile-classwork-workDetail{
+    display: grid;
+    text-align: center;
+}
+
+.profile-classwork-workDetail span:nth-child(1){
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.profile-classwork-workDetail span:nth-child(2){
+    color: grey;
+    font-size: 0.75em;
+}
+
+.profile-contactDetails-cont{
+    position: relative;
+    margin-top: -50px;
+    width: calc(100% - 425px);
+    margin-left: 10px;
+    /*margin-top: 10px;*/
+    height: fit-content;
+}
+
+.profile-contactDetails-cont article{
+    margin: 10px 0;
+}
+
+/*.profile-personalDetails-cont{*/
+    /*position: relative;*/
+    /*width: 370px;*/
+    /*top: -50px;*/
+/*}*/
+
+/*.profile-personalDetails{*/
+    /*overflow: hidden;*/
+    /*height: 200px;*/
+/*}*/
+
+/*.personalDetails{*/
+    /*display: grid;*/
+    /*margin-bottom: 15px;*/
+/*}*/
+
+.personalDetails span:nth-child(1){
+    font-size: 0.8em;
+    color: grey;
+}
+
+.personalDetails span:nth-child(2){
+    border: 1px solid var(--borderColor);
+    padding: 10px;
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+
+.personalDetails-btn-cont{
+    margin-top: 5px;
+    text-align: end;
+}
+
+.personalDetails-btn-cont button{
+    border: none;
+    background: none;
+    outline: none;
+    font-weight: bold;
+}
+
+.changePass-btn-cont{
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    background-color: #ffffff;
+    top: 50%;
+    left: 50%;
+    border-radius: 6px;
+    box-shadow: 0 0px 4px 1px #1a1a1a65 ;
+    cursor: pointer;
+    display: none;
+}
+
+.change-pass-outer{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.change-pass-cont{
+    position: fixed;
+    height: fit-content;
+    width: 40%;
+    padding: 20px ;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px 3000px #1a1a1a65 ;
+}
+
+.change-pass-cont header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.change-pass-cont article{
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.change-pass-cont input{
+    outline: none;
+    padding: 10px;
+    width: 200px;
+    margin-right: 5px;
+    border: none;
+    width: 100%;
+}
+
+.pass-toggle-btn{
+    font-size: 0.8em;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.changepass-btn-cont{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#forgotPassBtn{
+    color: blue;
+    outline: none;
+    background: none;
+    border: none;
+}
+
+#changePassword{
+    padding: 10px;
+    width: 100px;
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    background-color: #24638f;
+    color: #ffffff;
+}
+
+.change-pass-cont label{
+    font-size: 0.8em;
+    color: red;
+    margin-left: 10px;
+    display: none;
+}
+
+.classmate-list-cont{
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.classmate-list-cont:last-child{
+    border: none;
+}
+
+.classroom-img-cont{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background-color: lightcoral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.classroom-img-cont img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+}
+
+.classroom-name-cont{
+    margin-left: 5px;
+    display: grid;
+}
+
+.classroom-name-cont span:nth-child(1){
+    font-size: 1.1em;
+}
+.classroom-name-cont span:nth-child(2){
+    font-size: 0.75em;
+    color: grey;
+}

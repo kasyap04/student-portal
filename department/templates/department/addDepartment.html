@@ -1,0 +1,34 @@
+{% extends 'temp/admin.html' %}
+
+{% block adminMiddle %}
+    <link rel="stylesheet" href="/static/style/department/department.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Add departments</b> <i class="fas fa-ellipsis-v" onclick="openDepMenu(this, event)"></i> </header>
+        <div class="middle-inner-cont addDepartment">
+            <section class="addDep-name-cont">
+                <span>Full name</span>
+                <input type="text" id="addDepName">
+                <label></label>
+            </section>
+
+            <div>
+                <section class="addDep-shortname-cont">
+                    <span>Short name</span>
+                    <input type="text" id="addDepShortName">
+                    <label>d</label>
+                </section>
+                <section class="addDep-duration-cont">
+                    <span>Duration (year)</span>
+                    <input type="text" id="addDepDur">
+                    <label>dsf</label>
+                </section>
+            </div>
+            <section class="addDep-btn-cont">
+                <button onclick="clearAddDepartment()">Clear</button>
+                <button onclick="saveAddDepartment()">Save</button>
+            </section>
+
+        </div>
+    </div>
+<script src="/static/script/department/department.js"></script>
+{% endblock %}

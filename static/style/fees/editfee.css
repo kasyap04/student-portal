@@ -1,0 +1,145 @@
+.main-body-middle{
+    height: fit-content;
+}
+
+.department-cont{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 20px;
+    align-items: center;
+
+}
+
+.department-cont section{
+    text-align: center;
+    padding: 20px;
+}
+
+.department-cont section article:nth-child(1){
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.1em;
+}
+
+.department-cont section article:nth-child(2){
+    color: grey;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+
+.editFee-list-cont{
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--borderColor2);
+}
+
+.editFee-list-cont:last-child{
+    border: none;
+}
+
+.add-fee-sections{
+    display: grid;
+    width: 350px;
+}
+
+.add-fee-sections span{
+    color: grey;
+    font-size: 0.9em;
+}
+
+.add-fee-sections input, select{
+    padding: 10px;
+    width: 250px;
+    border: 1px solid var(--borderColor2);
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+}
+.add-fee-sections input{
+    width: 230px;
+}
+
+
+.add-fee-sections label{
+    font-size: 0.8em;
+    color: red;
+    display: none;
+}
+
+.editFee-cont{
+    display: flex;
+    align-items: center;
+}
+
+.editFee-list-cont header{
+    text-transform: capitalize;
+}
+
+.ediFee-btn-cont{
+    display: flex;
+}
+
+.ediFee-btn-cont button{
+    height: fit-content;
+    padding: 15px;
+    width: 150px;
+    border-radius: 5px;
+    margin-top: 25px;
+}
+.ediFee-btn-cont button:nth-child(1){
+    background: none;
+    border: 1px solid #24638f;
+}
+
+
+.ediFee-btn-cont button:nth-child(2){
+    background-color: #24638f;
+    border: 1px solid #24638f;
+    color: #ffffff;
+    margin-left: 40px;
+}
+
+.deleteFee-outer{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.deleteFee-cont{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0px 1px 5px 3000px var(--shadowColor);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.deleteFee-cont section{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.deleteFee-cont section button{
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: none;
+    color: grey;
+}
+
+.deleteFee-cont section button:nth-child(2){
+    font-weight: bold;
+    color: #000000;
+}

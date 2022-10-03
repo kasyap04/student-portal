@@ -1,0 +1,57 @@
+{% extends 'temp/student.html' %}
+
+{% block base %}
+    <title>Add My Complaints | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/complaints/complaints.css">
+    <div class="classwork-cont" style="margin-top: 0">
+        <header class="middleCont-header"><b>My Complaints</b> </header>
+        <div class="classwork-inner-cont">
+            <article class="createComplaintBtn-cont"> <button onclick="openCreateComplaint()"> <i class="fas fa-solid fa-plus"></i> File a complaint</button> </article>
+            <div class="complaint-history-cont">
+            {% for comp in complaint %}
+                <section class="complaint-box-cont" onclick="expandComplaint(this, event)">
+                    <div>
+                        <section>
+                            <article class="complaint-to"> <label>complaint to</label> <b>{{ comp.teacher_name }}</b> </article>
+                            <article class="complaint-body">{{ comp.body }}</article>
+                        </section>
+                        {% if comp.reply %}
+                            <section class="complaint-reply-cont">
+                                <article>Reply</article>
+                                <article>{{ comp.reply }}</article>
+                                <article class="complaint-box-bottom" style="margin-top: 10px; justify-content: end">{{ comp.respond_date }}</article>
+                            </section>
+                        {% endif %}
+                    </div>
+                    <section class="complaint-box-bottom">
+                        <article class="complaint-datetime"> {{ comp.date }} </article>
+                        <article>{{ comp.respond_status }}</article>
+                    </section>
+
+                </section>
+            {% endfor %}
+            </div>
+            <div class="complaint-new-cont">
+                {% csrf_token %}
+
+                <article class="complain-fileto">
+                    <label>File complaint to </label> <form id="complaintFrom"><input type="radio" name="complaintTo" value="t"> Class teacher
+                    <input type="radio" name="complaintTo" value="hod"> HOD <input type="radio" name="complaintTo" value="p"> Principal</form>
+                </article>
+                <span class="complaint-err fileto"></span>
+
+                <section class="complain-create-cont">
+                    <label>Complaint body </label> <textarea maxlength="200" id="complaintbody"></textarea>
+                    <article id="complantCharCount">0/200</article>
+                    <span class="complaint-err create"></span>
+                </section>
+                <article class="complain-btn-cont">
+                    <button id="complaintCancelBtn" onclick="closeCreateComplaintCont()">Cancel</button>
+                    <button onclick="postComplaint()">Submit</button>
+                </article>
+            </div>
+        </div>
+    </div>
+
+<script src="/static/script/complaints/complaints.js"></script>
+{% endblock %}

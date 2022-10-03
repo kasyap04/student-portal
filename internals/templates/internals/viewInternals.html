@@ -1,0 +1,33 @@
+{% extends 'temp/student.html' %}
+{% block base %}
+<title>Internals | Don Bosco Collage Mampetta</title>
+<link rel="stylesheet" href="/static/style/internals/internals.css">
+
+    <div class="classwork-cont" style="margin-top: 0">
+        <header class="middleCont-header"><b>My Internals</b> </header>
+        <div class="classwork-inner-cont">
+
+            <section class="attend-cont" >
+                Sem : <select id="sem" onchange="getInternals()">
+                <option></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="2">3</option>
+                <option value="2">4</option>
+                <option value="2">5</option>
+                <option value="2">6</option>
+            </select>
+
+                 <br><br>
+                {% csrf_token %}
+                <div class="display-internals-cont">
+                    <div id="internals">
+
+                    </div>
+                </div>
+                <script src="/static/script/internals/getinternals.js"></script>
+            </section>
+
+        </div>
+    </div>
+{% endblock %}

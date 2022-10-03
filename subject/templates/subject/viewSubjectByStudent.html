@@ -1,0 +1,23 @@
+{% extends 'temp/student.html' %}
+
+
+
+
+{% block base %}
+    <link rel="stylesheet" href="/static/style/subject/subject.css">
+
+    <div class="classwork-cont">
+        <header class="middleCont-header"><b>Your Subjects</b> </header>
+        <div class="classwork-inner-cont">
+            <div class="subjects-list-cont">
+            {% for i in sub %}
+                <section class="subject-list" data-subId="{{ i.sub_id }}">
+                    <article class="subject-name">{{ i.name }}</article>
+                    <article class="subject-teacher">{{ i.teacher_id }}</article>
+                </section>
+            {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

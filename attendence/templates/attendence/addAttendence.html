@@ -1,0 +1,87 @@
+{% extends 'temp/teachers.html' %}
+
+{% block teachers %}
+    {% if user == "hod" %}
+        <title>Edit Attendence - {{ dep_name }} Department</title>
+        {% else %}
+        <title>Add Attendence - {{ dep_name }} Department</title>
+    {% endif %}
+    <link rel="stylesheet" href="/static/style/attendence/attendence.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header">{% if user == "hod" %} <b>Edit attendence</b> {% else %} <b>Add attendence</b> {% endif %}  {% if dep_id %} <i class="fas fa-ellipsis-v" onclick="openEditAttend(this, event)"></i> {% endif %}  </header>
+        <div class="middle-inner-cont">
+            <div class="department-cont">
+                <section>
+                    <article>{{ dep_name }}</article>
+                    <article>Department</article>
+                </section>
+                <section style="margin-left: 20px">
+                    <article>{{ stu.0.current_sem }}</article>
+                    <article>Semester</article>
+                </section>
+            </div>
+
+        <input type="hidden" value="{{ stu.0.dep_id }}" id="attDep">
+        <input type="hidden" value="{{ stu.0.current_sem }}" id="attSem">
+        {% csrf_token %}
+
+            <section class="att-date"> <span>Date</span> <input type="date" id="attDate" value="{{ date }}"> </section>
+{% if stu %}
+            <div class="attendence-student-cont">
+                <section class="attendence-heading-list">
+                    <article>Name</article>
+                    <article>Present</article>
+                    <article>Absent</article>
+                    <article>Hald day</article>
+                </section>
+
+                    <form id="attendForm">{% for s in stu %}
+                    <section class="attendence-student-list" data-stu="{{ s.stu_id }}">
+                        <article>
+                            <div class="img"> <img src="/static/{{ s.image }}"> </div>
+                            <article> <article>{{ s.name }}</article> <article style="font-size: 0.8em; color: grey ">{{ s.adm_no }}</article> </article>
+                        </article>
+                        {% if s.attend == "p" %}
+                            <article> <input type="radio" value="p" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}" checked> </article>
+                            <article> <input type="radio" value="a" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}"> </article>
+                            <article> <input type="radio" value="h" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}"> </article>
+                            {% elif s.attend == "a" %}
+                            <article> <input type="radio" value="p" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}"> </article>
+                            <article> <input type="radio" value="a" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}" checked> </article>
+                            <article> <input type="radio" value="h" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}"> </article>
+                            {% elif s.attend == "h" %}
+                            <article> <input type="radio" value="p" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}"> </article>
+                            <article> <input type="radio" value="a" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}"> </article>
+                            <article> <input type="radio" value="h" data-attendId="{{ s.attend_id }}" onclick="editAttendence(this)" name="att{{ s.stu_id }}" checked> </article>
+                            {% else %}
+                            <article> <input type="radio" value="p" name="att{{ s.stu_id }}"> </article>
+                            <article> <input type="radio" value="a" name="att{{ s.stu_id }}"> </article>
+                            <article> <input type="radio" value="h" name="att{{ s.stu_id }}"> </article>
+                        {% endif %}
+                    </section>
+                    {% endfor %}</form>
+
+            {% if user != "hod" %}
+            <section class="attendence-btn-cont">
+                    <button onclick="clearEntry()">Clear</button>
+                    <button onclick="uploadAttendence()">Upload attendence</button>
+                </section>
+            {% endif %}
+
+
+            </div>
+    {% else %}
+    <article class="editAttErr">No attendence for this day</article>
+{% endif %}
+        </div>
+    </div>
+    <div class="editAttendence-count">
+        <article onclick="openDateCount()">Edit attendence</article>
+    </div>
+    <div class="editAttend-date-cont">
+        <header> <label>Select date</label> <i class="fas fa-times" onclick="closeDateCont()"></i></header>
+        <input type="date" onchange="gotoEditAttend(this)">
+    </div>
+
+    <script src="/static/script/attendence/attendence.js"></script>
+{% endblock %}

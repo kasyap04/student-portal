@@ -1,0 +1,33 @@
+{% extends 'temp/student.html' %}
+
+{% block base %}
+    <title>Attendence | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/attendence/myattendence.css">
+    <div class="classwork-cont">
+        <header class="middleCont-header"><b>My Attendence</b> </header>
+        <div class="classwork-inner-cont">
+            <section class="attendence-top-cont">
+                <input type="month" value="{{ y }}-{{ m }}" onchange="changeAttendenceMonth(this)">
+                <div class="attendence-instruction">
+                    <section class="day-present"></section>Present
+                    <section class="day-absent"></section>Absent
+                    <section class="day-halfday"></section>Half day
+                </div>
+            </section>
+
+            <section class="attend-cont" id="attendenceCont">
+                <section class="week-cont">
+                    {% for w in weeks %}
+                        <article><b>{{ w }}</b></article>
+                    {% endfor %}
+                </section>
+                <section class="days-cont">
+                    {% for d in days %}
+                        <article {% for a in attend %} {% if d == a.date %} {% if a.attend == "a" %} class="day-absent" {% elif a.attend == "p" %} class="day-present" {% elif a.attend == "h" %} class="day-halfday" {% endif %} {% endif %} {% endfor %} >{{ d }}</article>
+                    {% endfor %}
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="/static/script/attendence/attendence.js"></script>
+{% endblock %}

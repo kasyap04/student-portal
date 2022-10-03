@@ -1,0 +1,66 @@
+{% extends 'temp/teachers.html' %}
+
+{% block teachers %}
+    {% if students %}
+        <title>Edit Exam Marks Of Students | {{ sub }}</title>
+        {% elif internals %}
+        <title>Edit Exam Marks Of {{ stu_name }} | {{ sub }}</title>
+    {% endif %}
+
+    <link rel="stylesheet" href="/static/style/internals/internals.css">
+    <div class="middle-cont innerCont"> {% csrf_token %}
+        <header class="middle-header"> <b>Edit exam marks</b> </header>
+        <div class="middle-inner-cont">
+            <section class="subject-cont">
+                <article>{{ sub }}</article>
+                <article>{{ dep }} {{ sem }}</article>
+            </section>
+            {% if students %}
+                <div class="student-list-cont" style="width:fit-content ;">
+                    <header>Select student</header>
+                    {% for s in students %}
+                        <a href="/internals/edit?sub={{ sub_id }}&stu={{ s.stu_id }}"><section class="edit-student-list">
+                            <div class="img"> <img src="/static/{{ s.image }}"> </div>
+                            <article> <span>{{ s.name }}</span> <span>{{ s.adm_no }}</span> </article>
+                        </section></a>
+                    {% endfor %}
+
+                </div>
+            {% endif %}
+
+            {% if internals %}
+                <div class="edit-internals-cont">
+                    <header> <div class="img"><img src="/static/{{ stu_image }}"></div> <article> <span>{{ stu_name }}</span> <span>{{ stu_adm }}</span> </article> </header>
+                    {% for i in internals %}
+                    <div class="edit-internals">
+                        <section class="exam-cont edit-part">
+                            <article style="width: 280px">
+                                <span>Exam name</span>
+                                <span>{{ i.exam_name }}</span>
+                            </article>
+                            <article>
+                                <span>Total mark</span>
+                                <span>{{ i.total_mark }}</span>
+                            </article>
+                            <article>
+                                <span>Conducted on</span>
+                                <span>{{ i.date }}</span>
+                            </article>
+                        </section>
+                        <section class="edit-marks-cont">
+                            <article>
+                                <span style="font-size: 0.9em; color: grey">Student scored</span>
+                                <input type="text" id="mark{{ i.int_id }}" value="{{ i.obtained_mark }}" oninput="checkNumber(this)">
+                            </article>
+                            <button data-tot="{{ i.total_mark }}" onclick="saveEditedInternals({{ i.int_id }}, this)">Save change</button>
+                        </section>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+<script src="/static/script/internals/editinternals.js"></script>
+{% endblock %}

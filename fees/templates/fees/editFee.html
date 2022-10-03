@@ -1,0 +1,131 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+    <title>Edit Academic Fee - {{ fee.0.dep_id  }} {{ fee.0.sem }} | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/fees/editfee.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Edit academic fee</b></header>
+        <div class="middle-inner-cont edit-fee">
+
+             <div class="department-cont">
+                 <section>
+                     <article>{{ fee.0.dep_id }}</article>
+                     <article>Department</article>
+                 </section>
+                 <section>
+                     <article>{{ request.GET.sem }}</article>
+                     <article>Semester</article>
+                 </section>
+             </div>
+
+            {% for i in fee %}
+
+                <div class="editFee-list-cont" id="feeCont{{ i.fee_id }}">
+                    <header><b>{{ i.fee_name }} Fee</b></header>
+                    <div class="editFee-cont">
+                        <section class="add-fee-sections addFee-amount">
+                            <span>Fee amount</span>
+                            <input type="text" id="ediFeeAmount{{ i.fee_id }}" value="{{ i.fee_amount }}">
+                            <label id="ediFeeErr{{ i.fee_id }}">sdf</label>
+                        </section>
+                        <section class="add-fee-sections addFee-due">
+                            <span>Due date</span>
+                            {% if i.due_date != "None" %}
+                                <input type="date" id="editFeeDue{{ i.fee_id }}" value="{{ i.due_date }}">
+                                {% else %}
+                                <input type="date" id="editFeeDue{{ i.fee_id }}" >
+                            {% endif %}
+                            <label id="editFeeErr{{ i.fee_id }}">sdf</label>
+                        </section>
+                        <section class="add-fee-sections ediFee-btn-cont">
+                            <button onclick="openDeleteFeeCont({{ i.fee_id }})">Delete</button>
+                            <button onclick="saveChanges({{ i.fee_id }})">Save changes</button>
+                        </section>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+
+        </div>
+
+        <div class="deleteFee-outer" data-fee="">
+            <div class="deleteFee-cont">
+                <article>Are you sure you want to delete the fee</article>
+                <section>
+                    <button onclick="closeDeleteFee()">Not now</button>
+                    <button onclick="deleteFee()">Yes, delete</button>
+                </section>
+            </div>
+        </div>
+
+    </div>
+    <script src="/static/script/fees/editfee.js"></script>
+{% endblock %}
+{##}
+{#<div>#}
+{#    {% csrf_token %}#}
+{#    Department : {{ fee.0.dep_id }}#}
+{#    Semester : {{ fee.0.sem }}#}
+{#    {% for i in fee %}#}
+{#        <br>#}
+{#    <div id="feeCont{{ i.fee_id }}">#}
+{#        <br>Fees : <input type="text" id="fee{{ i.fee_id }}" value="{{ i.fee_amount }}"> <br>#}
+{#        Fee type : <input type="text" id="type{{ i.fee_id }}" value="{{ i.fee_name }}"><br>#}
+{#        Due date : <input type="date" id="due{{ i.fee_id }}" value="{{ i.due_date }}"> <br>#}
+{#        <input type="button" value="Delete" onclick="deleteFee({{ i.fee_id }})">#}
+{#        <input type="button" value="Edit" onclick="editFee({{ i.fee_id }})">#}
+{#        <input type="button" value="Save" onclick="saveChanges({{ i.fee_id }})">#}
+{#    </div>#}
+{#    {% endfor %}#}
+{##}
+{#</div>#}
+
+{#<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>#}
+{##}
+{#<script>#}
+{#    resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 ) ;#}
+{##}
+{#    function saveChanges(feeId) {#}
+{#        const fee = document.getElementById(`fee${ feeId }`).value ,#}
+{#            type = document.getElementById(`type${ feeId }`).value,#}
+{#            due = document.getElementById(`due${ feeId }`).value ;#}
+{##}
+{#        $.ajax({#}
+{#            cache: false,#}
+{#            type: "POST",#}
+{#            url: "",#}
+{#            data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),#}
+{#                feeId: feeId, fee: fee, type: type, due: due#}
+{#            },#}
+{#            success: function (result) {#}
+{#                console.log(result) ;#}
+{#            },#}
+{#            error: function (jqXHR, exception, responseText) {#}
+{#                console.log(jqXHR, exception, responseText) ;#}
+{#            }#}
+{#        }) ;#}
+{#    }#}
+{##}
+{#    function deleteFee(feeId) {#}
+{#        $.ajax({#}
+{#            cache: false,#}
+{#            type: "POST",#}
+{#            url: "deletefee",#}
+{#            data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),#}
+{#                feeId: feeId#}
+{#            },#}
+{#            success: function (result) {#}
+{#                console.log(result) ;#}
+{#                let data = JSON.parse(resJson(result))[0] ;#}
+{#                if(data == "s"){#}
+{#                    document.getElementById(`feeCont${ feeId }`).remove() ;#}
+{#                }#}
+{#            },#}
+{#            error: function (jqXHR, exception, responseText) {#}
+{#                console.log(jqXHR, exception, responseText) ;#}
+{#            }#}
+{#        }) ;#}
+{#    }#}
+{##}
+{#</script>#}

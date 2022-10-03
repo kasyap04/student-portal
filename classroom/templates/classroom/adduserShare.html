@@ -1,0 +1,72 @@
+<div>
+    <form method="post" id="userShareForm" entype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="dep" value="{{ dep }}">
+        <input type="hidden" name="sem" value="{{ sem }}">
+        <input type="hidden" name="sub" value="{{ sub }}">
+        <section id="userShareBody" style="height: 100px;" contenteditable="true"></section>
+        <textarea name="userShareBody" id="userShareBodyCopy"></textarea>
+        <section id="attachments"></section>
+
+        <div id="addAttachments">
+        </div>
+
+
+        <br><br> <input type="submit" value="Submit">
+    </form>
+    <button id="addAttachmentBtn">Add attachments</button>
+    <button onclick="bold()">bold</button>
+</div>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+
+    function bold(){
+        document.getElementById('userShareBody').innerHTML += "{bold}" ;
+    }
+
+    resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 ) ;
+
+    let fileInputNums = 0 ;
+
+    document.getElementById('addAttachmentBtn').addEventListener("click", function () {
+      //  document.getElementById('addAttachments').innerHTML += `<input type="file" id="userShareFile${fileInputNums}" name="userShare${fileInputNums}">`
+        $("#addAttachments").append(`<input type="file" id="userShareFile${fileInputNums}" name="userShare${fileInputNums}">`) ;
+        fileInputNums++ ;
+    }) ;
+
+
+    $("#userShareForm").on("submit", function (e) {
+        e.preventDefault() ;
+
+        document.getElementById('userShareBodyCopy').value = document.getElementById('userShareBody').innerHTML ;
+
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "",
+            data: new FormData(this),
+            contentType:false,
+            processData:false,
+            xhr: function () {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", (evt) => {
+                    if (evt.lengthComputable) {
+                    var percentComplete = Math.round((evt.loaded / evt.total) * 100) ;
+                     console.log(percentComplete)
+                }
+            }, false);
+                return xhr;
+            },
+            success: function (result) {
+                console.log(result) ;
+            },
+            error: function (jqXHR, exception, responseText) {
+                console.log(jqXHR, exception, responseText) ;
+            }
+        }) ;
+
+    }) ;
+
+
+</script>

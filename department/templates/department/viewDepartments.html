@@ -1,0 +1,38 @@
+<style>
+
+    .department-list-cont{
+        display: flex;
+    }
+
+    .department{
+        height: 100px;
+        width: 300px;
+        background-color: lightblue;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 10px;
+    }
+
+    .dep-name{
+        font-size: 1.4em;
+    }
+
+    .dep-hod{
+        font-size: 0.9em;
+        color: grey;
+    }
+
+</style>
+
+<div class="department-list-cont">
+    {% for i in dep %}
+        <section class="department" data-depId="{{ i.dep_id }}">
+            <article class="dep-name">{{ i.name }}</article>
+            <article class="dep-hod">{{ i.hod }}</article>
+        </section>
+    {% endfor %}
+
+</div>

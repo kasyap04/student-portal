@@ -1,0 +1,86 @@
+{% extends 'temp/principal.html' %}
+
+{% block principalMiddle %}
+    <link rel="stylesheet" href="/static/style/fees/viewByPrincipal.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Academic fee</b>  </header>
+        <div class="middle-inner-cont view-fee">
+
+            <div class="department-cont">
+                <section>
+                    <article>{{ dep }}</article>
+                    <article>Department</article>
+                </section>
+                <section>
+                    <article>{{ request.GET.sem }}</article>
+                    <article>Semester</article>
+                </section>
+            </div>
+
+            {% for s in students %}
+            <div class="student-cont">
+                <div class="student-cont-top">
+                    <div class="student-cont-image"> <img src="/static/{{ s.image }}"> </div>
+                    <div class="student-cont-stu">
+                        <article class="student-cont-name">{{ s.name }}</article>
+                        <article class="student-cont-adm">{{ s.adm_no }}</article>
+                    </div>
+                </div>
+                <div class="student-cont-bottom">
+                {% if s.status == "paid" %}
+                    {% for d in s.paid_details %}
+                        <div class="student-cont-fee">
+                            <section class="student-cont-feeDetails">
+                                <article style="text-transform: capitalize;"><b>{{ d.name }} fee</b></article>
+                                <article>Fee name</article>
+                            </section>
+                            <section class="student-cont-feeDetails">
+                                <article>{{ d.paid }}</article>
+                                <article>Paid</article>
+                            </section>
+                            <section class="student-cont-feeDetails">
+                                <article>{{ d.balance }}</article>
+                                <article>Balance</article>
+                            </section>
+                            <section class="student-cont-feeDetails">
+                                <article>{{ d.fee_amount }}</article>
+                                <article>Total</article>
+                            </section>
+                            <section class="student-cont-feeDetails">
+                                <article>{{ d.date }}</article>
+                                <article>Paid date</article>
+                            </section>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <article class="student-cont-notPaid">Fee pending</article>
+                {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+</div>
+
+{% endblock %}
+      {% if students %}
+            {% for s in students %}
+            <article>
+            Student name : {{ s.name }} {{ s.adm_no }}<br>
+            {% if s.status == "paid" %}
+                {% for d in s.paid_details %}
+                    Fee name : {{ d.name }}<br>
+                    Total : {{ d.fee_amount }}<br>
+                    Paid : {{ d.paid }}<br>
+                    Balance : {{ d.balance }}<br>
+                    Date : {{ d.date }}<br>
+                {% endfor %}
+
+            {% else %}
+                status : {{ s.status  }}
+            {% endif %}
+            </article><br>
+            {% endfor %}
+
+        {% endif %}
+        </div>

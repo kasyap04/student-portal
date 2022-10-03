@@ -1,0 +1,148 @@
+::-webkit-scrollbar{
+    width: 2px;
+}
+
+::-webkit-scrollbar-track{
+    background: #eeeeee;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgba(30, 114, 244, 0.18);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: rgba(30, 114, 244, 0.31);
+
+}
+
+.main-body-middle{
+    height: fit-content;
+}
+
+.view-attendence header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.view-attendence header section{
+    display: flex;
+    align-items: center;
+    /*background: lightgray;*/
+}
+
+.view-attendence header section span{
+    margin-right: 20px;
+    margin-left: 2px;
+}
+
+#selMonth{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--borderColor2);
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.attendence-main{
+    overflow-x: scroll;
+    margin-top: 50px;
+}
+
+.attendence-head{
+    display: flex;
+    width: fit-content;
+    text-align: center;
+    margin-left: 135px;
+}
+
+.attendence-head-days{
+    width: 30px;
+    margin: 5px;
+    /*background-color: lightgreen;*/
+    display: grid;
+}
+
+.attendence-head-days span:nth-child(2){
+    color: grey;
+    font-size: 0.7em;
+}
+
+.attendence-stu-list{
+    display: flex;
+    /*background-color: lightgray;*/
+    align-items: center;
+    margin-top: 20px;
+    width: fit-content;
+    padding: 10px 0;
+    /*padding-bottom: 10px;*/
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.attendence-stu-list:last-child{
+    border: none;
+}
+
+.attendence-stu{
+    display: flex;
+    align-items: center;
+    /*background-color: lightgreen;*/
+    background-color: #ffffff;
+    /*position: fixed;*/
+}
+
+.stu-image{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stu-image img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.stu-name{
+    display: grid;
+    margin-left: 5px;
+}
+
+.stu-name span:nth-child(1){
+    text-transform: capitalize;
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.stu-name span:nth-child(2){
+    color: grey;
+    font-size: 0.7em;
+}
+
+.attendence-mark{
+    width: 30px;
+    margin: 5px;
+    /*background-color: lightblue;*/
+    display: flex;
+    justify-content: center;
+}
+
+.attend-mark{
+    height:10px;
+    width: 10px;
+    background-color: #b5b5b5;
+}
+
+.attendence-absent{
+    background-color: red;
+}
+
+.attendence-present{
+    background-color: green;
+}

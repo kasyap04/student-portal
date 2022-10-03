@@ -1,0 +1,125 @@
+{% extends 'temp/principal.html' %}
+
+{% block principalMiddle %}
+    <link rel="stylesheet" href="/static/style/student/profile.css">
+    <link rel="stylesheet" href="/static/style/student/studentProfilePrincipal.css">
+    <div class="classwork-cont">
+        <header class="middleCont-header"><b>Profile</b></header>
+        <div class="classwork-inner-cont">
+
+            <div class="profile-conts">
+                <div class="profile-picName-cont">
+                    <section class="profile-picName-left">
+                        <article class="profile-pic-cont"> <img src="/static/{{ stu.image }}"> </article>
+                        <article class="profile-name-cont">{{ stu.name }}</article>
+                        <article class="profile-name-admno">{{ stu.adm_no }}</article>
+                    </section>
+
+                    <section class="profile-picName-right">
+                        <article >
+                            <span>{{ stu.dep_id }}</span>
+                            <span>Department</span>
+                        </article>
+                        <article>
+                            <span>{{ stu.current_sem }}</span>
+                            <span>Semester</span>
+                        </article>
+                    </section>
+                </div>
+
+                <div class="profile-classwork-progress-cont">
+                    <section class="profile-classwork-top">
+                        <div class="profile-classwork-top-left">
+                            <article class="profile-classwork-workDetail" style="margin-top: 30px">
+                            <span>{{ stu.academic_years }}</span>
+                            <span>Academic year</span>
+                        </article>
+                        </div>
+                        <div class="profile-classwork-top-right" id="progress" data-progress="[{{ stu.works }}, {{ stu.submited }}, {{ stu.pending }}]">
+                            <div class="circular">
+                              <div class="inner"></div>
+
+                              <div class="circle">
+                                 <div class="bar left">
+                                    <div class="progress"></div>
+                                 </div>
+                                 <div class="bar right">
+                                    <div class="progress"></div>
+                                 </div>
+                               </div>
+                                <div class="circle2">0%</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="profile-classwork-bottom">
+                        <article class="profile-classwork-workDetail">
+                            <span>{{ stu.works }}</span>
+                            <span>Classworks</span>
+                        </article>
+                        <article class="profile-classwork-workDetail">
+                            <span>{{ stu.submited }}</span>
+                            <span>Handed in</span>
+                        </article>
+                        <article class="profile-classwork-workDetail">
+                            <span>{{ stu.pending }}</span>
+                            <span>Pending</span>
+                        </article>
+                    </section>
+                </div>
+            </div>
+
+            <div class="profile-conts">
+
+
+                <div class="profile-contactDetails-cont">
+                    <section class="profile-contactDetails">
+                        <article><i class="fas fa-at"></i> {{ stu.email }}</article>
+                        <article><i class="fas fa-phone-alt"></i> {{ stu.phone }}</article>
+                        <article><i class="fas fa-calendar-check"></i>  <section class="address">{{ stu.dob }}</section> </article>
+                    </section>
+                </div>
+
+                <div class="students-action-cont">
+                    <header class="profile-cont-headers">Settings</header>
+                    <a href="/notifications/add?stu={{ stu.stu_id }}"> <article><i class="fas fa-bell"></i> Send notification</article> </a>
+                </div>
+
+            </div>
+        </div>
+    <div class="changePass-btn-cont" onclick="openChangePassCount()">Change password</div>
+    <div class="change-pass-outer"> {% csrf_token %}
+        <div class="change-pass-cont">
+            <header>Change password <i class="fas fa-times" onclick="closeChangePassCount()"></i></header>
+            <section>
+                <article class="oldPassword-arti"> <input type="password" id="oldPassword" placeholder="Enter your password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                <label class="oldPassword-label">fsdf</label>
+                <article class="newPassword-arti" style="margin-top: 20px"> <input type="password" id="newPassword" placeholder="Choose new password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                <label class="newPassword-label">fsdf</label>
+                <article class="newPassCopy-arti"> <input type="password" id="newPassCopy" placeholder="Retype new password"> <span class="pass-toggle-btn" data-show="f" onclick="togglePassword(this)">show</span> </article>
+                <label class="newPassCopy-label">fsdf</label>
+            </section>
+            <section class="changepass-btn-cont"> <button id="forgotPassBtn">Forgot password?</button> <button id="changePassword">Change</button></section>
+        </div>
+    </div>
+    </div>
+    <script src="/static/script/student/profile.js"></script>
+{% endblock %}
+
+{% block principalRight %}
+    <div class="classmate-cont">
+        <header class="rightCond-header"><b>Classmates</b></header>
+        <section class="classmate-inner-cont">
+            {% for c in classmates %}
+                <a href="/student/profile?stu={{ c.stu_id }}"><section class="classmate-list-cont">
+                    <article class="classroom-img-cont">
+                        <img src="/static/{{ c.image }}">
+                    </article>
+                    <article class="classroom-name-cont">
+                        <span>{{ c.name }}</span>
+                        <span>{{ c.adm_no }}</span>
+                    </article>
+                </section></a>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}

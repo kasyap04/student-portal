@@ -1,0 +1,97 @@
+{% extends 'temp/principal.html' %}
+{% block principalMiddle %}
+    <title>Internals</title>
+    <link rel="stylesheet" href="/static/style/internals/viewInternalPrincipal.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Internals</b>  </header>
+        <div class="middle-inner-cont view-internals">
+
+        <select onchange="changeExamName(this)">
+            {% if exam == 1 %}
+            <option value="1" selected>1st internal examination</option>
+            <option value="2">2nd internal examination</option>
+            <option value="3">Class test</option>
+                {% elif exam == 2 %}
+                <option value="1">1st internal examination</option>
+                <option value="2" selected>2nd internal examination</option>
+                <option value="3">Class test</option>
+                {% elif exam == 3 %}
+                <option value="1">1st internal examination</option>
+                <option value="2">2nd internal examination</option>
+                <option value="3" selected>Class test</option>
+                {% else %}
+                <option value="1">1st internal examination</option>
+                <option value="2">2nd internal examination</option>
+                <option value="3">Class test</option>
+            {% endif %}
+        </select>
+
+            <div class="internal-main">
+                <table cellpadding="10px" cellspacing="0">
+                <tr>
+                    <th rowspan="2"></th>
+                    {% for s in subjects %}
+                    <th colspan="2">{{ s }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for s in subjects %}
+                        <td class="internal-sub-head">Scored</td>
+                        <td class="internal-sub-head">Total</td>
+                    {% endfor %}
+                </tr>
+                {% for m in marks %}
+                <tr class="student-area">
+                    <td class="student-name-cont">
+                        <div class="image-cont"> <img src="/static/{{ m.img }}"> </div>
+                        <article>
+                            <span>{{ m.name }}</span>
+                            <span>{{ m.adm_no }}</span>
+                        </article>
+                    </td>
+                    {% for s in m.marks %}
+                        <td><b>{{ s.obtained }}</b></td>
+                        <td class="internal-total">{{ s.total }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+
+            </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+    function changeExamName(t) {
+        location.href = '/internals/studentinternal?dep=1&sem=1&exam=' + t.value ;
+    }
+
+    </script>
+
+{% endblock %}
+
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th rowspan="2">Student</th>
+        <th colspan="{{ subject.0.count }}">Subject</th>
+    </tr>
+    <tr>
+        {% for sub in subject %}
+        <td colspan="2">{{ sub.sub_name }} ({{ sub.date }})</td>
+        {% endfor %}
+
+    </tr>
+        {% for i in internal %}
+            <tr>
+
+        <td>{{ i.name }}</td>
+        {% for j in i.int %}
+        <td>{{ j.obtained_mark }}</td>
+        <td>{{ j.total_mark }}</td>
+        {% endfor %}
+            </tr>
+        {% endfor %}
+
+</table>

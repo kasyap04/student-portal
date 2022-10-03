@@ -1,0 +1,65 @@
+  {% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+    <title>Add Subject To {{ dep }}</title>
+    <link rel="stylesheet" href="/static/style/subject/addSubjects.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Add subjects</b>  </header>
+        <div class="middle-inner-cont add-subjects">
+            <div class="department-cont">
+                <input type="hidden" id="adSubDep" value="{{ request.GET.dep }}">
+                <input type="hidden" id="adSubSem" value="{{ request.GET.sem }}">
+                <section>
+                    <article>{{ dep }}</article>
+                    <article>Department</article>
+                </section>
+                <section>
+                    <article>{{ request.GET.sem }}</article>
+                    <article>Semester</article>
+                </section>
+            </div>
+
+            <div class="add-subject-cont1">
+                <section class="add-sub">
+                    <span>Subject name</span>
+                    <input type="text" id="addSubName" autocomplete="off">
+                    <label id="addSubErr3">sdf</label>
+                </section>
+            </div>
+            <div class="add-subject-cont2">
+                <section class="add-sub">
+                    <span>Code</span>
+                    <input type="text" id="addSubCode" autocomplete="off">
+                    <label id="addSubErr4">sdf</label>
+                </section>
+                <section class="add-sub">
+                    <span>Type</span>
+                    <input type="text" id="addSubType" placeholder="eg: Compli" autocomplete="off">
+                    <label id="addSubErr5">sdf</label>
+                </section>
+            </div>
+
+            <div class="add-subject-cont3">
+                <section class="add-sub">
+                    <span>Teach by</span>
+                    <select id="addSubTeacher">
+                        <option></option>
+                        {% for i in teachers %}
+                        <option value="{{ i.teacher_id }}">{{ i.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label id="addSubErr6">sdf</label>
+                </section>
+                <section class="add-sub">
+                    <span>Admission year</span>
+                    <select id="addSubYear">
+                    </select>
+                    <label id="addSubErr7">sdf</label>
+                </section>
+            </div>
+
+            <button onclick="addNewSubjects()" class="addSubBtn">Add subject</button>
+
+        </div>
+    </div>
+    <script src="/static/script/subjects/addsubject.js"></script>
+{% endblock %}

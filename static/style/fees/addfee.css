@@ -1,0 +1,62 @@
+.main-body-middle{
+    height: fit-content;
+}
+
+.add-fee-cout{
+    display: flex;
+}
+
+.add-fee-sections{
+    display: grid;
+    width: 350px;
+    margin-bottom: 60px;
+}
+
+.add-fee-sections span{
+    color: grey;
+    font-size: 0.9em;
+}
+
+.add-fee-sections input, select{
+    padding: 10px;
+    width: 250px;
+    border: 1px solid var(--borderColor2);
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+}
+.add-fee-sections input{
+    width: 230px;
+}
+
+
+.add-fee-sections label{
+    font-size: 0.8em;
+    color: red;
+    display: none;
+}
+
+.addFee-btn-cont{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+
+.addFee-btn-cont button{
+    padding: 10px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid #24638f;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.addFee-btn-cont button:nth-child(1){
+    background-color: #ffffff;
+    margin-right: 40px;
+}
+
+.addFee-btn-cont button:nth-child(2){
+    background-color: #24638f;
+    color: #ffffff;
+}

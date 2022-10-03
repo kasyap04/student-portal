@@ -1,0 +1,46 @@
+
+
+.classteacher-top{
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.classteacher-field{
+    width: 400px;
+    display: grid;
+}
+
+.classteacher-field span{
+    font-size: 0.9em;
+    color: grey;
+}
+
+.classteacher-field select{
+    padding: 15px;
+    border: 1px solid var(--borderColor);
+    border-radius: 5px;
+    width: 280px;
+    font-size: 1em;
+    outline: none;
+}
+
+.classteacher-field label{
+    font-size: 0.7em;
+    color: red;
+    display: none;
+}
+
+.classteacher-btn-cont{
+    margin-top: 50px;
+    /*text-align: end;*/
+}
+
+.classteacher-btn-cont button{
+    padding: 12px;
+    width: 130px;
+    background-color: #24638f;
+    border: 1px solid #24638f;
+    color: #ffffff;
+    font-size: 1em;
+    border-radius: 5px;
+}

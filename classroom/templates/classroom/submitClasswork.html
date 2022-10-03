@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ classwork.title}} - {{ classwork.sub_name }} - Classwork</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+        <link rel="stylesheet" href="/static/style/base.css">
+        <link rel="stylesheet" href="/static/style/classroom/submit.css">
+        {% if students %}
+            <link rel="stylesheet" href="/static/style/classroom/notforstudent.css">
+        {% endif %}
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="page-name-cont">
+                <div class="header-icon-cont"><i class="fas goback fa-chevron-left"></i></div>
+                <span class="header-name">
+                    <h2>Classwork</h2>
+                </span>
+            </div>
+        </header>
+
+        <div class="main-body-classwork">
+            <section class="classwork-heading">
+                <header class="classwork-main-heading">
+                    <article class="main-heading-icon"> <i class="fas fa-file-alt" aria-hidden="true"></i> </article>
+                    <article class="main-heading-body">{{ classwork.body }}</article>
+                </header>
+                <article class="main-heading-teacher-due">
+                    <span>{{ classwork.teacher_name }} <article class="dot"></article> {{ classwork.date }}</span>
+                    <span><label>Due {{ classwork.due_date }}, {{ classwork.due_time }}</label>  </span>
+                </article>
+            </section>
+
+{#        <article class="addFile-btn-cont">#}
+{#                    #}
+{#                </article>#}
+
+        {% if not students %}
+            <section class="classwork-work-cont">
+                <form method="post" entype="multipart/form-data" id="submitWorkForm"> {% csrf_token %} <input type="hidden" id="workid" name="workid" value="{{ classwork.work_id }}">
+                    <div class="classwork-work-selected">
+                        <header class="classwork-work-header"> <label>Add your work</label>  <label class="classwork-status"><b>{{ classwork.due_status }}</b></label> </header>
+                        <section class="classwork-work-inner">
+                        {% if not submited %}
+                        <article class="classwork-work-labels">No file selected</article>
+                        {% endif %}
+
+
+                            <div class="classwork-work-form">
+                                <header class="work-form-header"> <span>Upload file</span> <i class="fas fa-times" onclick="closeUploadFile()"></i> </header>
+                                <section class="work-form-inner" id="attachmentCont"></section>
+                            </div>
+
+                            <section class="work-inner-cont" id="displaySelectedFile">
+                                {% if submited %}
+                                    {% for med in submited.medias %}
+                                    <a href="/static/uploads/{{ med.name }}"><section class="select-file">
+                                    <article class="select-file-icon"><i class="fas fa-file-alt"></i></article>
+                                    <article class="select-file-name">
+                                        <span> {{ med.name }} </span>
+                                        <span>{{ med.ext }}</span>
+                                    </article>
+                                    </section></a>
+                                    {% endfor %}
+
+                                {% endif %}
+                            </section>
+
+                        </section>
+                        <article class="submit-btn-cont" id="classWorkBtnCont">
+
+                            {% if submited %}
+                                <button onclick="openUnsubmitCount({{ classwork.work_id }}); return false;" class="work-handin-btn">Unsubmit</button>
+                                {% else %}
+                                <button id="adddFileBtn" onclick="createAttchmentButton(); return false;"> <b>Add file</b> </button>
+                                <input type="submit" value="Hand in" id="classworkSubmitBtn" class="work-handin-btn disbled" disabled>
+                            {% endif %}
+                        </article>
+                    </div>
+                    <div class="classwork-work-form-cont"></div>
+
+                    <div class="classroom-loading-cont">
+                        <section class="classroom-loading-before">
+                            <header>Uploading...</header>
+                            <section class="classroom-loading-inner">
+                                <article id="loadinPercentage">10% </article>
+                                <div class="classroom-loading-track">
+                                    <div class="classroom-loading-bar"></div>
+                                </div>
+                            </section>
+                        </section>
+                        <section class="classroom-loading-after">
+                            <article> <span style="color: black">Completed</span> <i class="fas fa-check-circle"></i> </article>
+                        </section>
+                    </div>
+
+                </form>
+
+            </section>
+        {% endif %}
+
+        {% if students %}
+        <div class="submited-work-cont">
+            <div class="submited-work-student-cont">
+                <header>Students</header>
+                <section class="submited-work-student-inner">
+                    {% for s in students %}
+                        <section {% if s.stu_id == workdone.stu_id %} class="submited-work-student-list studentListSelected" {% else %} class="submited-work-student-list" {% endif %}><a href="submit?work={{ classwork.work_id }}&stu={{ s.stu_id }}">
+                            <article class="student-list-name"> <article class="student-list-img"> <img src="/static/{{ s.image }}"> </article> <article><span>{{ s.name }}</span> <span>{{ s.adm_no }}</span></article> </article>
+                            <article class="student-list-status"> {% if s.status == 'Missing' %} <span style="color: red">{{ s.status }} </span>  {% else %} <span>{{ s.status }} </span> {% endif %}<span>{{ s.remark }}</span> </article>
+                            <article class="student-list-date">{{ s.date }}</article>
+                        </a></section>
+                    {% endfor %}
+                </section>
+            </div>
+            {% if workdone %}
+                <div class="submited-work-media-cont">
+                    <header>Submited</header>
+                    <section class="submited-work-media-inner">
+                        {% if workdone.medias  %}
+                            {% for m in workdone.medias %}
+                                <a href="/static/{{ m.name }}" download><div class="media-items">
+                                    <section class="media-image-cont">
+                                        <i class="fas fa-file-alt"></i>
+                                    </section>
+                                    <section class="media-body-cont">
+                                        <article>{{ m.file }}</article>
+                                        <article>{{ m.ext }}</article>
+                                    </section>
+                                </div>
+                            {% endfor %}
+                            {% else %}
+                            <article class="fileNotFound-err">File not found</article>
+                        {% endif %}
+                    </section>
+                </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+
+
+
+        </div>
+
+        <div class="unsubmit-outer">
+            <div class="unsubmit-cont">
+                <header>Are you sure you want to unsubmit the work?</header>
+                <section class="unsubmit-btn-cont">
+                    <button id="unsubmitBtnNo" onclick="closeUnsubmitCont()">Cancel</button>
+                    <button id="unsubmitBtnYes" data-workid="" onclick="unsubmitWork(this)"><b>Yes, Do it</b></button>
+                </section>
+            </div>
+        </div>
+
+        <div class="lineMsg-cont">Its a single line message</div>
+
+         <div class='loading-outer'>
+                <div class='loadingCont'>
+                    <div class="loading-icon" id="loadingIcon">
+                        <div class='clock1'>
+                            <div class='big-one'></div>
+                        </div>
+                        <div class='clock2'>
+                            <div class='small-one'></div>
+                        </div>
+                        <label>Loading..</label>
+                    </div>
+                </div>
+            </div>
+
+        <script src="/static/script/base.js"></script>
+        <script src="/static/script/classroom/submit.js"></script>
+    </body>
+</html>
+
+

@@ -1,0 +1,48 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle%}
+    <title>Create Or Edit Class Teachers | Don Bosco Collage Mampetta </title>
+    <link rel="stylesheet" href="/static/style/teacher/classteacher.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Class teachers</b> </header>
+        <div class="middle-inner-cont classteacher">
+            <div class="classteacher-top">
+                <section class="classteacher-top-left classteacher-field">
+                    <span>Department</span>
+                    <select id="ctDep" onchange="getTeachers()">
+                        <option></option>
+                        {% for d in dep %}
+                        <option value="{{ d.dep_id }}">{{ d.short_name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label>fsd</label>
+                </section>
+                <section class="classteacher-top-right classteacher-field">
+                    <span>Semester</span>
+                    <select id="ctSem" onchange="getTeachers()">
+                        <option></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                    <label>fsd</label>
+                </section>
+            </div>
+            <div class="classteacher-bottom">
+                <section class="classteacher-bottom-cont classteacher-field">
+                    <span>Class teacher</span>
+                    <select id="classteacher">
+
+                    </select>
+                    <label>fsd</label>
+                </section>
+            </div>
+        <div class="classteacher-btn-cont">
+            <button onclick="saveClassTeacher()">Save</button>
+        </div>
+        </div>
+    </div>
+    <script src="/static/script/teacher/classteacher.js"></script>
+{% endblock %}

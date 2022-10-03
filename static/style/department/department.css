@@ -1,0 +1,66 @@
+.main-body-middle{
+    height: fit-content;
+}
+
+.addDep-name-cont{
+    display: grid;
+}
+
+.addDepartment span{
+    font-size: 0.9em;
+    color: grey;
+}
+
+.addDepartment input{
+    padding: 10px;
+    width: 60%;
+    border: none;
+    border-bottom: 1px solid var(--borderColor2);
+    outline: none;
+    font-size: 1.1em;
+    margin-top: 5px;
+}
+
+.addDepartment input:focus{
+    background-color: rgba(173, 216, 230, 0.13);
+}
+
+.addDep-name-cont + div{
+    display: flex;
+    margin-top: 40px;
+}
+
+.addDep-shortname-cont, .addDep-duration-cont{
+    display: grid;
+}
+
+.addDepartment label{
+    font-size: 0.8em;
+    color: red;
+    display: none;
+}
+
+.addDep-btn-cont{
+    margin-top: 40px;
+    text-align: end;
+    width: calc(100% - 10px);
+}
+
+.addDep-btn-cont button{
+    outline: none;
+    background: none;
+    border: none;
+    padding: 10px;
+}
+
+.addDep-btn-cont button:nth-child(1){
+    color: grey;
+    margin-right: 20px;
+}
+.addDep-btn-cont button:nth-child(2){
+    font-weight: bold;
+}
+
+#addDepDur{
+    text-align: center;
+}

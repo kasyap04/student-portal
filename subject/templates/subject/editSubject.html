@@ -1,0 +1,205 @@
+{% extends 'temp/admin.html' %}
+
+<style>
+    .editSubject-list-cont{
+        display: flex;
+        margin-top: 10px;
+    }
+    .editSubject-list-cont article{
+        border: 1px solid grey;
+        padding: 10px;
+    }
+</style>
+
+{% block adminMiddle %}
+    <title>Edit Subject - {{ subject.0.dep_id  }} Semester {{ subject.0.sem }} | Don Bosco Collage Mampetta</title>
+    <title>Edit Subject - {{ subject.0.dep_id  }} Semester {{ subject.0.sem }} | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/subject/viewSubjects.css">
+    <style>
+    .main-body-middle{
+        width: calc(100% - 290px);
+    }
+    .main-body-right{
+        display: none;
+    }
+    </style>
+    <div class="middle-cont innerCont">
+        <input type="hidden" value="{{ dep_id }}" id="">
+        <input type="hidden" value="{{ sem }}" id="">
+        <header class="middle-header"> <b>Edit subjects</b> </header>
+        <div class="middle-inner-cont view-subjects">
+        <div class="department-cont">
+            <section>
+                <article>{{ subject.0.dep_id  }}</article>
+                <article>Department</article>
+            </section>
+            <section>
+                <article>{{ subject.0.sem }}</article>
+                <article>Semester</article>
+            </section>
+        </div>
+        </div>
+    </div>
+
+<div>
+    <div>
+        {% for sub in subject %}
+    <section class="editSubject-list-cont" id="subList{{ sub.sub_id }}">
+        <article class="edit-sub-name" id="name{{ sub.sub_id }}"> {{ sub.name }} </article>
+        <article class="edit-sub-code" id="code{{ sub.sub_id }}"> {{ sub.code }} </article>
+        <article class="edit-sub-type" id="type{{ sub.sub_id }}"> {{ sub.type }} </article>
+        {% for t in teacher %}
+        {% if sub.teacher_id == t.teacher_id %}
+            <article class="edit-sub-teacher" id="teacher{{ sub.sub_id }}" data-teacherId="{{ t.teacher_id }}" onclick="changeTeacher({{ sub.sub_id }})"> {{ t.name }} </article>
+             {% endif %}
+        {% endfor %}
+
+        <article class="edit-sub-btn-cont"> <button id="delBtn{{ sub.sub_id }}" class="edit-dub-delBtn edi-btns" onclick="openDeleteCont({{ sub.sub_id }})">Delete</button> <button id="editBtn{{ sub.sub_id }}" class="edit-sub-editBtn" onclick="editSubject({{ sub.sub_id }})">Edit</button> <button id="saveBtn{{ sub.sub_id }}" class="edit-sub-saveBtn edi-btns" onclick="saveSubject({{ sub.sub_id }})">Save</button> <button id="cancelBtn{{ sub.sub_id }}" class="edit-sub-cancelbtn edi-btns" onclick="cancelUpdate({{ sub.sub_id }})">cancel</button>  </article>
+    </section>
+    {% endfor %}
+    </div>
+    <div>
+
+    </div>
+</div>
+
+    <div class="delete-conf-outer" data-id="">
+        <div class="delete-conf-cont">
+            <article>Are you sure you want to delete the subject</article>
+            <section>
+                <button onclick="closeDeleteCont()">Not now</button>
+                <button onclick="deleteSubject()">Yes, delete</button>
+            </section>
+        </div>
+    </div>
+
+    <div class="teacher-sel-outer">
+        <div class="teacher-sel-cont">
+            <header> <span>Select teacher</span> <i class="fas fa-times" onclick="closeSelectTeacher()"></i> </header>
+            <div>
+                <select id="selTeacher" onchange="selectTeacher()" >
+                    <option></option>
+                    {% for t in teacher %}
+                    <option value="{{ t.teacher_id }}=={{ t.name }}">{{ t.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script/student/editSubjects.js"></script>
+{% endblock %}
+
+{#<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>#}
+{##}
+{#<script>#}
+{##}
+{#    resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 ) ;#}
+{##}
+{#    function editSubject(id) {#}
+{#        for(let i = 0; i <= 2; i++){#}
+{#            document.getElementById(`subList${id}`).children[i].setAttribute("contenteditable", "true") ;#}
+{#        }#}
+{#    }#}
+{##}
+{#    function cancelUpdate(id) {#}
+{#        for(let i = 0; i <= 2; i++){#}
+{#            document.getElementById(`subList${id}`).children[i].setAttribute("contenteditable", "false") ;#}
+{#        }#}
+{#    }#}
+{##}
+{#    function saveSubject(id ) {#}
+{#        const selected = document.getElementById(`subList${id}`) ;#}
+{#        let sub = {#}
+{#            csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),#}
+{#            name: document.getElementById(`name${id}`).innerText,#}
+{#            code: document.getElementById(`code${id}`).innerText,#}
+{#            type: document.getElementById(`type${id}`).innerText,#}
+{#            teacher: document.getElementById(`teacher${id}`).getAttribute("data-teacherId"),#}
+{#            subId: id,#}
+{#            swift: 1#}
+{#        } ;#}
+{##}
+{##}
+{#        let canSaveChanges = true ;#}
+{#        for(let i = 0; i < Object.keys(sub).length; i++){#}
+{#            if(sub[Object.keys(sub)[i]] == ""){#}
+{#                canSaveChanges = false ;#}
+{#                break ;#}
+{#            }#}
+{#        }#}
+{#        if(canSaveChanges){#}
+{#            $.ajax({#}
+{#                cache:false,#}
+{#                type:"POST",#}
+{#                url:"",#}
+{#                data:sub,#}
+{#                success:function(result){#}
+{#                    console.log(result) ;#}
+{#                    console.log("res = ", result) ;#}
+{#                    let data = JSON.parse(resJson(result))[0] ;#}
+{#                    if(data == "s"){#}
+{#                        console.log("SUCCESS") ;#}
+{#                        cancelUpdate(id) ;#}
+{#                    }#}
+{#                },#}
+{#                error:function(jqXHR, exception, responseText){#}
+{#                    console.log(jqXHR) ;#}
+{#                    console.log(exception) ;#}
+{#                    console.log(responseText) ;#}
+{#                }#}
+{#            }) ;#}
+{#        } else#}
+{#            console.log("please fill all field") ;#}
+{#    }#}
+{##}
+{#    function deleteSubject(id) {#}
+{#        let sub = {#}
+{#            csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),#}
+{#            subId: id,#}
+{#            swift: 2#}
+{#        } ;#}
+{##}
+{#        $.ajax({#}
+{#            cache:false,#}
+{#            type:"POST",#}
+{#            url:"",#}
+{#            data:sub,#}
+{#            success:function(result){#}
+{#                console.log(result) ;#}
+{#                let data = JSON.parse(resJson(result))[0] ;#}
+{#                if(data == "s"){#}
+{#                    console.log("SUCCESS") ;#}
+{#                    document.getElementById(`subList${id}`).remove() ;#}
+{#                }#}
+{#            },#}
+{#            error:function(jqXHR, exception, responseText){#}
+{#                console.log(jqXHR) ;#}
+{#                console.log(exception) ;#}
+{#                console.log(responseText) ;#}
+{#            }#}
+{#        }) ;#}
+{#    }#}
+{##}
+{#    const teacherSelectedId = {#}
+{#        id: 0,#}
+{#    } ;#}
+{##}
+{#    $("#selTeacher").hide() ;#}
+{##}
+{#    function selectTeacher() {#}
+{#        const selected = document.getElementById('selTeacher').value ;#}
+{#        let id = selected.substring(0, selected.indexOf('==')).trim() ,#}
+{#            name = selected.substring(selected.indexOf('==')+2).trim() ;#}
+{#        document.getElementById(`teacher${teacherSelectedId.id}`).setAttribute("data-teacherId", id)#}
+{#        document.getElementById(`teacher${teacherSelectedId.id}`).innerText = name ;#}
+{#        $("#selTeacher").hide() ;#}
+{#        $("#selTeacher").val("") ;#}
+{#    }#}
+{##}
+{#    function changeTeacher(id) {#}
+{#        $("#selTeacher").show() ;#}
+{#        teacherSelectedId.id = id ;#}
+{#    }#}
+{##}
+{#</script>#}

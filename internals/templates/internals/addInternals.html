@@ -1,0 +1,54 @@
+{% extends 'temp/teachers.html' %}
+
+{% block teachers %}
+    <title>Exam Marks For Students | {{ sub }}</title>
+    <link rel="stylesheet" href="/static/style/internals/internals.css">
+    <div class="middle-cont innerCont"> {% csrf_token %}
+        <header class="middle-header"> <b>Add exam marks</b> </header>
+        <input type="hidden" value="{{ sub_id }}" id="internalSubId">
+        <div class="middle-inner-cont">
+            <section class="subject-cont">
+                <article>{{ sub }}</article>
+                <article>{{ dep }} {{ sem }}</article>
+            </section>
+
+            <div class="exam-cont">
+                <article>
+                    <span>choose exam</span> <select id="examName">
+                        <option></option>
+                        <option value="1">1st internal examination</option>
+                        <option value="2">2nd internal examination</option>
+                        <option value="3">Class test</option>
+                    </select>
+                </article>
+
+                <article>
+                    <span>Total mark</span> <input type="text" id="internalTotalMark" oninput="checkNumber(this)">
+                </article>
+
+                <article>
+                    <span>Exam conducted on</span> <input type="date" id="internalDate">
+                </article>
+            </div>
+
+            <div class="student-list-cont">
+
+                    {% for s in students %}
+                        <section class="student-list">
+                            <article class="student-admno"><div class="img"> <img src="/static/{{ s.image }}"> </div>{{ s.adm_no }}</article>
+                            <article class="student-name">{{ s.name }}</article>
+                            <article class="student-mark"> <input type="text" data-id="{{ s.stu_id }}" class="studentMark" oninput="checkNumber(this)"> </article>
+                        </section>
+                    {% endfor %}
+
+            </div>
+
+            <section class="internal-btn-cont">
+                <button onclick="clearEntry()">Clear all</button>
+                <button onclick="submitInternals()">Upload internals</button>
+            </section>
+
+        </div>
+    </div>
+    <script src="/static/script/internals/addinternals.js"></script>
+{% endblock %}

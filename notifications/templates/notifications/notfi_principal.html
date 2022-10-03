@@ -1,0 +1,50 @@
+{% extends 'temp/principal.html' %}
+
+{% block principalMiddle %}
+    <title>Send Notification | {{ dep }} | Semester {{ sem }}</title>
+<link rel="stylesheet" href="/static/style/teacher/notification.css"> {% csrf_token %}
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Add notification</b> </header>
+        <div class="middle-inner-cont">
+{#            <span>Notification send to</span>#}
+            {% if stu %}
+                <link rel="stylesheet" href="/static/style/student/profile.css">
+                <div class="profile-picName-cont" style="margin-bottom: 20px">
+                <section class="profile-picName-left">
+                    <article class="profile-pic-cont"> <img src="/static/{{ image }}"> </article>
+                    <article class="profile-name-cont">{{ stu}}</article>
+                    <article class="profile-name-admno">{{ adm }}</article>
+                </section>
+
+                <section class="profile-picName-right">
+                    <article >
+                        <span style="color: #ffffff">{{ dep }}</span>
+                        <span>Department</span>
+                    </article>
+                    <article>
+                        <span style="color: #ffffff;">{{ sem}}</span>
+                        <span>Semester</span>
+                    </article>
+                </section>
+            </div>
+                {% else %}
+                <div class="notification-class-cout">
+                <section class="class-cout"> <article>{{ dep }}</article> <article>Department</article> </section>
+                <section class="class-cout"> <article style="top:15px">{{ sem }}</article> <article>Semester</article> </section>
+            </div>
+            {% endif %}
+            <article class="label-notif-body">Notification body</article>
+            {% if stu %}
+                <input type="hidden" value="{{ stu_id }}" data-con="stu" id="contId">
+                {% else %}
+                <input type="hidden" value="{{ dep_id }}" data-con="dep" id="contId">
+            {% endif %}
+            <input type="hidden" value="{{ sem_id }}" id="conSem">
+            <textarea id="notif"></textarea>
+            <span></span>
+            <section><button onclick="postNotification()" id="notifiSendBtn"><i class="fas fa-paper-plane"></i>Send</button></section>
+        </div>
+    </div>
+    <script src="/static/script/notifications/notifications.js"></script>
+{% endblock %}
+

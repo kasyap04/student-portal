@@ -1,0 +1,57 @@
+
+<style>
+
+    .upcoming-event-cont{
+        margin-top: 20px;
+    }
+
+    .event{
+        display: flex;
+    }
+    .event article{
+        border: 1px solid grey;
+        padding: 10px;
+        width: 100px;
+    }
+</style>
+
+<h1>Events</h1>
+
+<div class="events-alll-cont">
+        {% if today %}
+        <div class="today-event-cont">
+        <header>Today</header>
+        {% for e in today %}
+            <section class="event">
+                <article class="event-date">{{ e.date }}</article>
+                <article class="event-body">{{ e.body }}</article>
+            </section>
+        {% endfor %}
+
+        </div>
+        {% endif %}
+
+
+    <div class="upcoming-event-cont">
+        <header>Upcoming</header>
+        {% for e in upcoming %}
+        <section class="event">
+            <article class="event-date">{{ e.date }}</article>
+            <article class="event-body">{{ e.body }}</article>
+        </section>
+        {% endfor %}
+    </div>
+
+    {% if thismonth %}
+    <div class="thismont-event-cont">
+        <header>This month</header>
+        {% for e in thismonth %}
+            <section class="event">
+                <article class="event-date">{{ e.date }}</article>
+                <article class="event-body">{{ e.body }}</article>
+        </section>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>

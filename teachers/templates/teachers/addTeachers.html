@@ -1,0 +1,128 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+
+     <link rel="stylesheet" href="/static/style/student/resgisterEdit.css">
+    <div class="middle-cont innerCont">
+    {% if teacher %}
+        <title>Edit Teacher - {{ teacher.0.name }} | DonBosco Collage Mampetta</title>
+        <header class="middle-header"> <b>Edit teacher</b></i> </header>
+        {% else %}
+        <title>Register Teacher | DonBosco Collage Mampetta</title>
+        <header class="middle-header"> <b>Register teacher</b></i> </header>
+    {% endif %}
+        <div class="middle-inner-cont view-department">
+            <form method="post" {% if teacher %} id="teacherEditForm" {% else %} id="teacherRegForm" {% endif %} >{% csrf_token %}
+                {% if teacher %}
+                <input type="hidden" name="teacherId" value="{{ teacher.0.teacher_id }}">
+                {% endif %}
+
+                <div class="student-fields">
+                    <article class="teacher-name student-field-cont">
+                        <span>Full name</span>
+                        <input type="text" name="name" value="{{ teacher.0.name }}" autocomplete="off" required>
+                        <label>df</label>
+                    </article>
+                </div>
+
+                <div class="student-fields">
+                    <article class="teacher-number student-field-cont">
+                        <span>Mobile number</span>
+                        <input type="text" name="num" id="num" value="{{ teacher.0.mobile }}" autocomplete="off" required>
+                        <label>df</label>
+                    </article>
+                    <article class="teacher-email student-field-cont">
+                        <span>Email</span>
+                        <input type="text" name="email" id="email" value="{{ teacher.0.email }}" autocomplete="off" required>
+                        <label>df</label>
+                    </article>
+                </div>
+
+                <div class="student-fields">
+                    <article class="teacher-dob student-field-cont">
+                        <span>Date of birth</span>
+                        <input type="date" name="dob" value="{{ teacher.0.dob }}" autocomplete="off" required>
+                        <label>df</label>
+                    </article>
+                    <article class="teacher-gender student-field-cont">
+                        <span>Gender</span>
+                        {% if teacher.0.gender == "male" %}
+                            <article><input type="radio" name="gender" value="male" checked>Male <input type="radio" name="gender" value="female" required>Female <input type="radio" name="gender" value="rns" > Rather not specify</article>
+                        {% elif teacher.0.gender  == "female" %}
+                            <article><input type="radio" name="gender" value="male" required>Male <input type="radio" name="gender" value="female" checked>Female <input type="radio" name="gender" value="rns" > Rather not specify</article>
+                            {% elif teacher.0.gender  == "rns" %}
+                            <article><input type="radio" name="gender" value="male" required>Male <input type="radio" name="gender" value="female" >Female <input type="radio" name="gender" value="rns" checked> Rather not specify</article>
+                            {% else %}
+                            <article><input type="radio" name="gender" value="male" required>Male <input type="radio" name="gender" value="female" >Female <input type="radio" name="gender" value="rns"> Rather not specify</article>
+                        {% endif %}
+                        <label>df</label>
+                    </article>
+                </div>
+
+                <div class="student-fields">
+                    <article class="techer-qualif student-field-cont">
+                        <span>Qualifications</span>
+                        <input type="text" name="qual" value="{{ teacher.0.qualification }}" autocomplete="off", required>
+                        <label>df</label>
+                    </article>
+                    <article class="teacher-exp student-field-cont">
+                        <span>Experiance</span>
+                        <input input type="text" name="exp" id="exp" value="{{ teacher.0.experiance }}" autocomplete="off", required>
+                        <label>df</label>
+                    </article>
+                    <article class="teacher-dep student-field-cont">
+                        <span>Department</span>
+                        <select name="dep" required>
+                            <option></option>
+                            {% for i in dep %}
+                                {% if teacher.0.dep_id == i.dep_id %}<option value="{{ i.dep_id }}" selected>{{i.short_name}}</option>
+                                {% else %}
+                                    <option value="{{ i.dep_id }}">{{i.short_name}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <label>df</label>
+                    </article>
+                </div>
+            <div class="student-fields btn-cont">
+            {% if teacher %}
+                <input style="background: none; border:none ; margin-right: 20px; color: #24638f" type="reset" value="Reset">
+                <input class="resetBtn" type="button" value="delete" onclick="showDeleteTeachCont()">
+                <input class="submitBtn" type="submit" value="Save">
+                {% else %}
+                <input class="resetBtn" type="reset" value="Clear">
+                <input class="submitBtn" type="submit" value="submit" >
+            {% endif %}
+            </div>
+            </form>
+
+        <div class="delete-teacher-outer outer">
+            <div class="delete-teacher-cont">
+                <article>Are you sure you want to delete the teacher</article>
+                <section>
+                    <button onclick="closeDeleteTeachCont()">Not now</button>
+                    <button onclick="deleteTeacher({{ teacher.0.teacher_id }})">Yes, delete</button>
+                </section>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    {% if teacher %}
+    <script>
+    for (var i = 0; i < document.getElementsByClassName('admin-nav-cont')[0].children.length; i++){
+    document.getElementsByClassName('admin-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+    }
+    </script>
+        {% else %}
+        <script>
+        for (var i = 0; i < document.getElementsByClassName('admin-nav-cont')[0].children.length; i++){
+            document.getElementsByClassName('admin-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+        }
+        document.getElementsByClassName('admin-nav-cont')[0].children[2].children[0].classList.add('selectedNav') ;
+
+        </script>
+    {% endif %}
+
+    <script src="/static/script/teacher/registerOrEdit.js"></script>
+{% endblock %}

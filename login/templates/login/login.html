@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login - Student Portal</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+        <link rel="icon" type="image/x-icon" href="/static/images/icon.jpeg">
+        <link rel="stylesheet" href="/static/style/base.css">
+        <link rel="stylesheet" href="/static/style/login/login.css">
+        <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    </head>
+    <body background="/static/images/collage_image.jpg">
+        <header class="main-header">
+            <div class="page-name-cont">
+                <span class="header-name">
+                    <h2>Students Portal</h2>
+                </span>
+            </div>
+        </header>
+        <div class="login-form-cont">
+            <h3>Login to Student Portal</h3>
+            <form method="post" id="loginForm">
+                {% csrf_token %}
+
+                <section class="login-username-cont">
+                    <article class="login-labels">Number/Admission no</article>
+                    <article class="login-input inp"> <input type="text" name="userid" autocomplete="off">  </article>
+                </section>
+
+                <section class="login-password-cont">
+                    <article class="login-labels">Password</article>
+                        <article class="login-input pass"> <input type="password" name="pass" id="pass"> <article class="login-passshow-btn" data-show="false" onclick="togglePassword(this)">show</article> </article>
+                </section>
+
+                <article class="kmg-cont">keep me login <input type="checkbox" name="kml"></article>
+
+                <input type="submit" value="LOGIN" class="loginBtn">
+            </form>
+            <button class="forgotPasswordbtn" onclick="openNumberVerify()">forgot password?</button>
+        </div>
+
+        <div class="lineMsg-cont"></div>
+
+        <div class="opt-outer">
+            <div class="otp-number-cont changePassword-cont">
+                <b>Verify Number</b>
+                <article>Enter your registered mobile number</article>
+                <input type="text" id="mobileNumber" autocomplete="off">
+                <label>sdf</label>
+                <button onclick="verifyMobileNumber()">VERIFY</button>
+            </div>
+            <div class="otp-cont changePassword-cont">
+                <b>Verify OTP</b>
+                <article>We've send an OTP to the number <br> <span id="numberForOTP"></span> </article>
+                <input type="text" maxlength="6" id="otp" autocomplete="off">
+                <label>sdf</label>
+                <button onclick="verifyOTP()">VERIFY</button>
+            </div>
+            <div class="password-cont">
+                <header><b>Change password</b></header>
+                <article class="login-input pass"> <input type="password" id="pass1" placeholder="Create password" > <article class="login-passshow-btn" data-show="false" onclick="togglePassword(this)">show</article> </article>
+                <label class="forgotPassLabel1"></label>
+                <article class="login-input pass"> <input type="password" id="pass2" placeholder="Re-type password"> <article class="login-passshow-btn" data-show="false" onclick="togglePassword(this)">show</article> </article>
+                <label class="forgotPassLabel2"></label>
+                <button onclick="changeForgotPassword()">Change password</button>
+            </div>
+        </div>
+
+    <script src="/static/script/base.js"></script>
+    <script src="/static/script/login/login.js"></script>
+    </body>
+</html>

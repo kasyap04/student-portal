@@ -1,0 +1,88 @@
+body{
+    background-color: ghostwhite;
+}
+
+.login-form-cont{
+    margin-top: 60px;
+    background-color: #ffffff;
+    padding:30px 70px;
+    position: absolute;
+    top: 50%;
+    margin-left: 30px;
+    transform: translateY(-50%);
+}
+
+.login-form-cont h3{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-labels{
+    color: grey;
+    font-size: 0.8em;
+}
+
+.login-username-cont{
+    margin-bottom: 20px;
+}
+
+.login-input input{
+    padding: 10px;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.login-input {
+    width:280px ;
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+}
+
+input[name=userid]{
+    width: 240px;
+}
+
+.login-passshow-btn{
+    font-size: 0.8em;
+    width: 32px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.kmg-cont{
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.loginBtn{
+    margin-top: 30px;
+    width: 280px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #3ec2d3;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3ec2d3;
+    color: #ffffff;
+    font-size: 1.05em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.forgotPasswordbtn{
+    margin-top: 10px;
+    background: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    outline: none;
+}
+
+.forgotPasswordbtn:hover{
+    text-decoration: underline;
+}

@@ -1,0 +1,32 @@
+{% extends 'temp/teachers.html' %}
+
+
+
+<h1>View Subject By Teacher</h1>
+
+<div class="teacher-subject-list-cont">
+    {% for i in sub %}
+        <section class="teacher-subjects" data-subId="{{ i.sub_id }}">
+            <article class="subject-name">{{ i.name }} ({{ i.code }}) </article>
+            <article class="subject-class">{{ i.dep }} {{ i.sem }}</article>
+        </section>
+    {% endfor %}
+</div>
+{% block teachers %}
+    <div class="middle-cont">
+        <header class="middle-header"> <b>Your subjects</b> </header>
+        <div class="middle-inner-cont">
+            <div class="subjects-list-cont">
+                {% for i in sub %}
+                <section class="subject-list">
+                    <article class="subject-list-top"> <a href="/classroom/viewclassroom?sub={{ i.sub_id }}">{{ i.name }} ({{ i.code }})</a> </article>
+                    <article class="subject-list-bottom">
+                        <span>{{ i.dep }} {{ i.sem }}</span>
+                        <span>menu</span>
+                    </article>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

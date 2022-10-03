@@ -1,0 +1,152 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+    <link rel="stylesheet" href="/static/style/student/resgisterEdit.css">
+    <style>
+        {% if student and student.image %}
+            #image, .student-img{ display: none; }
+            {% else %}
+            .img-rem-cont, #img{ display: none; }
+        {% endif %}
+    </style>
+    <div class="middle-cont innerCont">
+    {% if student %}
+        <title>Edit Student - {{ student.name }} | Don Bosco Collage Mampetta</title>
+        <header class="middle-header"> <b>Edit student</b> </header>
+        {% else %}
+        <title>Register Student | Don Bosco Collage Mampetta</title>
+        <header class="middle-header"> <b>Resgister student</b> </header>
+    {% endif %}
+
+        <div class="middle-inner-cont reg-student">
+            <form method="post" enctype="multipart/form-data" {% if student %} id="stuEditForm" {% else %} id="stuRegForm" {% endif %}> {% csrf_token %} <input type="hidden" name="stuId" value="{{ student.stu_id }}">
+                <div class="students-top">
+                    <section class="student-top-left">
+                        <article class="student-name student-field-cont">
+                            <span>Full name</span>
+                            <input type="text" name="name" value="{{ student.name }}" autocomplete="off" required>
+                            <label>df</label>
+                        </article>
+                        <article class="student-admNo student-field-cont">
+                            <span>Admission number</span>
+                            <input type="text" name="adm" value="{{ student.adm_no }}" autocomplete="off" required>
+                            <label>df</label>
+                        </article>
+                    </section>
+                    <section class="student-top-right">
+                        <img src="/static/{{ student.image }}" id="img">
+                        <div class="student-img"></div>
+                        <input type="file" name="image" id="image" onchange="loadImage(event)" accept="image/*">
+                        <div class="img-rem-cont" {% if student %} onclick="deleteImage({{ student.stu_id }})" {% else %} onclick="removeImage()" {% endif %}> <div></div> </div>
+                    </section>
+                </div>
+
+                <div class="student-fields">
+                    <article class="student-dob student-field-cont">
+                        <span>DOB</span>
+                        <input type="date" name="dob" value="{{ student.dob }}" required>
+                        <label>df</label>
+                    </article>
+                    <article class="student-gender student-field-cont">
+                        <span>Gender</span>
+                        {% if student.gender == "male" %}
+                            <article><input type="radio" name="gender" value="male" checked>Male <input type="radio" name="gender" value="female" required>Female <input type="radio" name="gender" value="rns" > Rather not specify</article>
+                        {% elif student.gender == "female" %}
+                            <article><input type="radio" name="gender" value="male" required>Male <input type="radio" name="gender" value="female" checked>Female <input type="radio" name="gender" value="rns" > Rather not specify</article>
+                            {% elif student.gender == "rns" %}
+                            <article><input type="radio" name="gender" value="male" required>Male <input type="radio" name="gender" value="female" >Female <input type="radio" name="gender" value="rns" checked> Rather not specify</article>
+                            {% else %}
+                            <article><input type="radio" name="gender" value="male" required>Male <input type="radio" name="gender" value="female" >Female <input type="radio" name="gender" value="rns"> Rather not specify</article>
+                        {% endif %}
+                        <label>df</label>
+                    </article>
+                </div>
+
+                <div class="student-fields">
+                    <article class="student-number student-field-cont">
+                        <span>Mobile number</span>
+                        <input type="text" name="selfMobile" id="selfMobile" value="{{ student.phone }}" autocomplete="off" required>
+                        <label>df</label>
+                    </article>
+                    <article class="student-email student-field-cont">
+                        <span>Email</span>
+                        <input type="text" name="email" id="email" value="{{ student.email }}" autocomplete="off" required>
+                        <label>df</label>
+                    </article>
+                </div>
+
+{#                <div class="student-fields">#}
+{#                    <article class="student-city student-field-cont">#}
+{#                        <span>City</span>#}
+{#                        <input type="text" name="city" value="{{ student.city }}" autocomplete="off" required>#}
+{#                        <label>df</label>#}
+{#                    </article>#}
+{#                    <article class="student-district student-field-cont">#}
+{#                        <span>District</span>#}
+{#                        <input type="text" name="district" value="{{ student.district }}" autocomplete="off" required>#}
+{#                        <label>df</label>#}
+{#                    </article>#}
+{#                    <article class="student-address student-field-cont">#}
+{#                        <span>Address</span>#}
+{#                        <textarea name="address" required>{{ student.address }}</textarea>#}
+{#                        <label>df</label>#}
+{#                    </article>#}
+{#                </div>#}
+
+                <div class="student-fields">
+                    <article class="student-dep student-field-cont">
+                        <span>Department</span>
+                        <select name="dep" required>
+                        <option></option>
+                        {% for i in dep %}
+                                {% if student.dep_id == i.dep_id %}
+                                    <option value="{{ i.dep_id }}" selected>{{ i.short_name }}</option>
+                                    {% else %}
+                                    <option value="{{ i.dep_id }}">{{ i.short_name }}</option>
+                                {% endif %}
+
+                            {% endfor %}
+                        </select>
+                        <label>df</label>
+                    </article>
+                    <article class="student-year student-field-cont">
+                        <span>Year of joining</span>
+                        <input type="date" name="year" value="{{ student.join_year }}" required>
+                        <label>df</label>
+                    </article>
+                </div>
+
+                <div class="student-fields btn-cont">
+                    {% if student %}
+                        <input class="resetBtn" type="reset" value="Reset">
+                        <input class="submitBtn" type="submit" value="Save">
+                        {% else %}
+                        <input class="resetBtn" type="reset" value="Clear all">
+                        <input class="submitBtn" type="submit" value="Submit">
+                    {% endif %}
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        {% if student %}
+
+            for (var i = 0; i < document.getElementsByClassName('admin-nav-cont')[0].children.length; i++){
+                document.getElementsByClassName('admin-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+                }
+
+            {% else %}
+            for (var i = 0; i < document.getElementsByClassName('admin-nav-cont')[0].children.length; i++){
+                document.getElementsByClassName('admin-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+            }
+
+            document.getElementsByClassName('admin-nav-cont')[0].children[1].children[0].classList.add('selectedNav') ;
+
+        {% endif %}
+
+    </script>
+
+    <script src="/static/script/student/registerandedit.js"></script>
+{% endblock %}

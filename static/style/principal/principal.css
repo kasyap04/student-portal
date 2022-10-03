@@ -1,0 +1,337 @@
+.search-student-cont{
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--borderColor2);
+    background-color: rgba(255, 255, 255, 0.99);
+    padding: 0 10px;
+    border-radius: 10px;
+}
+
+.search-student-cont input{
+    padding: 10px;
+    width: 250px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.search-student-cont i{
+    font-size: 1.5em;
+    margin-left:5px ;
+    color: var(--mainHeadingColor);
+}
+
+.search-result-cont{
+    position: absolute;
+    color: black;
+    background-color: #ffffff;
+    width: 318px;
+    margin-left: 1px;
+    padding-top: 20px;
+    margin-top: -10px;
+    z-index: -1;
+    border: 1px solid var(--borderColor2);
+    border-radius: 0 0 10px 10px;
+    display: none;
+}
+
+.search-result-cont a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.search-result-list{
+    padding: 0 10px 10px 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--borderColor);
+    /*background-color: lightgreen;*/
+}
+
+.search-result-list:last-child{
+    border: none;
+}
+
+.search-result-list article:nth-child(2){
+    font-size: 0.8em;
+    color: grey;
+}
+
+.main-body-left{
+    width: 280px;
+    /*height: calc(100vh - 70px);*/
+    height: fit-content;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.main-body-middle{
+    /*width: calc(100% - 590px);*/
+    width: calc(100% - 290px);
+    height: calc(100vh - 70px);
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.main-body-right{
+    width: 300px;
+    /*height: calc(100vh - 70px);*/
+    height: fit-content;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: none;
+}
+/*************************************LEFT CONTAINER*****************************************/
+
+
+.teacher-profile-cont{
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: 5px;
+    padding: 10px;
+}
+
+.teacher-profile-top{
+    display: flex;
+    margin-right: 5px;
+    align-items: center;
+}
+
+.teacher-profile-img-cont{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.teacher-profile-img-cont i{
+    font-size: 2.5em;
+    color: var(--mainHeadingColor);
+}
+
+.teacher-profile-name-cont{
+    margin-left: 10px;
+    text-transform: capitalize;
+    color: var(--mainHeadingColor);
+    display: grid;
+}
+
+.teacher-profile-name-cont b{
+    font-size: 1.1em;
+}
+
+.teacher-profile-bottom{
+    font-size: 0.7em;
+    color: grey;
+    margin-top: 5px;
+    /*text-align: center;*/
+}
+
+#myName{
+    color: #000000;
+    font-size: 0.8em;
+}
+
+
+.principal-nav-cont{
+    position: relative;
+    /* background-color: lightgreen; */
+    height: calc(100% - 130px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.principal-nav-cont a{
+    margin-bottom: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+.nav-item{
+    /* margin-top: 10px; */
+    /* background-color: lightcoral; */
+    padding: 15px;
+}
+
+.nav-item:hover{
+    background-color: rgba(173, 216, 230, 0.123);
+}
+
+.selectedNav{
+    border-left: 4px solid var(--mainHeadingColor);
+    color: var(--mainHeadingColor);
+    background-color: rgba(173, 216, 230, 0.185);
+    font-weight: bold;
+}
+
+.nav-item i{
+    margin-left: 20px;
+    margin-right: 5px;
+    width: 20px;
+    text-align: center;
+}
+
+
+/****************************************MIDDLE CONTAIBER********************************************/
+
+.middle-cont{
+    height: 100%;
+}
+
+.middle-header{
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--borderColor);
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.innerCont, .right-cont{
+    padding: 10px;
+}
+
+.view-department{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+
+.department{
+    background-color: #3391ad;
+    padding: 10px;
+    border-radius: 10px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+}
+
+.view-dep-name{
+    text-transform: capitalize;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.view-dep-hod{
+    color: #dcdcdc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+}
+
+.view-dep-hod i{
+    font-size: 0.8em;
+}
+
+
+
+
+
+/********************** VIEW SUBJECT**************/
+
+.view-subjects a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.view-subject-list:hover{
+    background-color: rgba(173, 216, 230, 0.12);
+    border-radius: 10px;
+}
+/*****************************************************/
+
+
+
+.menu-cont{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #ffffff;
+    box-shadow: 0px 1px 5px 1px var(--shadowColor);
+    border-radius: 10px;
+    display: none;
+}
+
+.menu-cont a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.menu-cont article{
+    padding: 10px;
+    margin: 10px;
+}
+
+.menu-cont article:hover{
+    background-color: rgba(173, 216, 230, 0.11);
+}
+
+.menu-cont i{
+    margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.sel-sem-outer{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.sel-sem-cout, .upgradeSem-cont{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px 3000px var(--shadowColor);
+    width: 180px;
+}
+
+.sel-sem-cout header{
+    display: flex;
+    justify-content: space-between;
+    color: grey;
+    font-size: 0.9em;
+    border-bottom: 1px solid var(--borderColor2);
+}
+
+.sel-sem-cout article{
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.sel-sem-cout article:hover{
+    background-color: rgba(173, 216, 230, 0.15);
+}
+
+.sel-sem-outer a{
+    color: #000000;
+    text-decoration: none;
+}
+
+

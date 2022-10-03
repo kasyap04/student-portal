@@ -1,0 +1,82 @@
+{% extends 'temp/principal.html' %}
+
+{% block principalMiddle %}
+    <title>Complaints For You | Don Bosco Collage Mampatta</title>
+    <link rel="stylesheet" href="/static/style/complaints/complaints.css">
+    {% if comp_body %}
+    <style> .main-body-middle{ width: calc(100% - 760px);}
+    .main-body-right{
+        display: block;
+        width: 450px;
+        padding: 10px;
+        background-color: #ffffff;
+        height: fit-content;
+    }
+    .complaints-cont-left{
+        width: 430px;
+    }
+    .left-header{
+        border-bottom: 1px solid var(--borderColor);
+        padding-bottom: 10px;
+    }
+    </style>
+    {% endif %}
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Complaints</b> </header>
+        <div class="middle-inner-cont">
+            {% if complaints %}
+                {% for c in complaints %}
+                    <div {% if comp_id == c.complaint_id %} class="complaint-list-cont selected" {% else %} class="complaint-list-cont" {% endif %} >
+                        <a href="/complaints/view?id={{ c.complaint_id }}">
+                            <section class="complaint-list">
+                                <article class="complaint-sendby">
+                                    <span><b>{{ c.stu_id }}</b></span>
+                                    <span>{{ c.adm_no }}</span>
+                                </article>
+                                <article class="complaint-dep">{{ c.dep }} {{ c.sem }}</article>
+                                <article class="complaint-date">{{ c.date }}</article>
+                                <article class="complaint-status">{{ c.status }}</article>
+                            </section>
+                        </a>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <article class="no-complaints">There is no complaints for you</article>
+            {% endif %}
+        </div>
+    </div>
+<script>
+
+for (var i = 0; i < document.getElementsByClassName('principal-nav-cont')[0].children.length; i++){
+    document.getElementsByClassName('principal-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+}
+
+document.getElementsByClassName('principal-nav-cont')[0].children[1].children[0].classList.add('selectedNav') ;
+
+</script>
+{% endblock %}
+
+{% block principalRight %}
+        <div class="complaints-cont-left" {% if comp_body %} style="display: block" {% endif %}>
+        <header class="left-header"> <b>Body of complaint</b> </header>
+{#        <article> <span style="color: grey; font-size: 0.8em">Complaint filed by:</span> {{ from }}</article>#}
+        <div class="complaints-body">{{ comp_body }}</div>
+        <div class="complaint-sendreply-cont">
+            <header>Reply to complaint</header>{% csrf_token %}
+            <input type="hidden" id="repId" value="{{ request.GET.id }}">
+            <input type="text" id="complaintreply" maxlength="200" placeholder="Type your reply here" autocomplete="off" {% if reply %} value="{{ reply }}" {% endif %}>
+            <label class="reply-err"></label>
+            <button onclick="sendReply()"><i class="fas fa-paper-plane"></i> SEND</button>
+        </div>
+    </div>
+    <script src="/static/script/complaints/replay.js"></script>
+
+{#    <header class="left-header"> <b>Body of complaint</b> </header>#}
+{#        <article> <span style="color: grey; font-size: 0.8em">Complaint filed by:</span> {{ from }}</article>#}
+{#        <div class="complaints-body">{{ comp_body }}</div>#}
+
+{#    <div class="complaints-cont-left" {% if comp_body %} style="display: block" {% endif %}>#}
+{#        #}
+{#    </div>#}
+{% endblock %}
+

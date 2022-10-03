@@ -1,0 +1,126 @@
+{% extends 'temp/admin.html' %}
+
+{% block adminMiddle %}
+    <title>Subjects - {{ dep }} Semester {{ request.GET.sem }} | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/subject/viewSubjects.css">
+<div class="middle-cont innerCont">
+<input type="hidden" value="{{ dep_id }}" id="showSubDepId">
+<input type="hidden" value="{{ sem }}" id="showSubSem">
+    <header class="middle-header"> <b>Subjects</b> <i class="fas fa-ellipsis-v" onclick="openEditSubMenu(this, event)"></i> </header>
+    <div class="middle-inner-cont view-subjects">
+
+        <div class="department-cont">
+            <section>
+                <article>{{ dep }}</article>
+                <article>Department</article>
+            </section>
+            <section>
+                <article>{{ request.GET.sem }}</article>
+                <article>Semester</article>
+            </section>
+        </div>
+
+        {% for s in subjects %}
+        <section class="view-subject-list">
+            <article class="view-subject-type">{{ s.type }}</article>
+            <article class="view-subject-code">{{ s.code }}</article>
+            <article class="view-subject-name">{{ s.name }}</article>
+            <article class="view-subject-teacher">{{ s.teacher_id }}</article>
+        </section>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block adminRight %}
+<div class="right-cont">
+    <header class="rightCond-header"><b>HOD</b></header>
+    <section class="right-inner-cont view-subject-details">
+        <article>{{ hod }}</article>
+    </section>
+
+    <header class="rightCond-header"><b>Class teacher</b></header>
+    <section class="right-inner-cont view-subject-details">
+        <article>{{ ct }}</article>
+    </section>
+
+    <header class="rightCond-header"><b>Students</b></header>
+    <section class="right-inner-cont view-subject-details">
+        {% for s in students %}
+            <a href="/student/profile?stu={{ s.stu_id }}"><section class="stu-list">
+                <div class="img"> <img src="/static/{{ s.image }}"> </div>
+                <article>
+                    <span>{{ s.name }}</span>
+                    <span>{{ s.adm_no }}</span>
+                </article>
+            </section></a>
+        {% endfor %}
+
+    </section>
+
+</div>
+{% endblock %}
+{##}
+{#Department <select id="dep" onchange="getSubjects()">#}
+{#    <option></option>#}
+{#    {% for i in dep %}#}
+{#        <option value="{{ i.dep_id }}">{{ i.short_name }}</option>#}
+{#    {% endfor %}#}
+{#</select> <br>#}
+{#{% csrf_token %}#}
+{#sem : <select id="sem" onchange="getSubjects()">#}
+{#    <option></option>#}
+{#    <option value="1">1</option>#}
+{#    <option value="2">2</option>#}
+{#</select>#}
+{##}
+{##}
+{#<div class="subject-list-cont" id="subjectList">#}
+{##}
+{#</div>#}
+{##}
+{##}
+{#<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>#}
+{#<script>#}
+{##}
+{#    function getSubjects() {#}
+{#        const dep = document.getElementById('dep').value,#}
+{#            sem = document.getElementById('sem').value ;#}
+{#        document.getElementById('subjectList').innerHTML = "" ;#}
+{#        if(dep != "" && sem != ""){#}
+{#            $.ajax({#}
+{#                cache:false,#}
+{#                type:"POST",#}
+{#                url:"getsubjects",#}
+{#                data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),#}
+{#                    dep: dep, sem: sem#}
+{#                },#}
+{#                success:function(result){#}
+                  {#/  console.log(result)#}
+{#                    let data = JSON.parse(result) ;#}
+{#                    if(data.length > 0){#}
+{#                       // console.log(data) ;#}
+{##}
+{#                        for(let i = 0; i < data.length; i++){#}
+{#                            document.getElementById('subjectList').innerHTML += `#}
+{#                            <section class="subject-list">#}
+{#                                <article class="subject-type">${data[i].type}</article>#}
+{#                                <article class="subject-code">${data[i].code}</article>#}
+{#                                <article class="subject-name">${data[i].name}</article>#}
+{#                                <article class="subject-teacher">${data[i].teacher}</article>#}
+{#                            </section>` ;#}
+{#                        }#}
+{#                    }#}
+{##}
+{#                },#}
+{#                error:function(jqXHR, exception, responseText){#}
+{#                    console.log(jqXHR) ;#}
+{#                    console.log(exception) ;#}
+{#                    console.log(responseText) ;#}
+{#                }#}
+{#            }) ;#}
+{#        }#}
+{#    }#}
+{##}
+{#</script>#}

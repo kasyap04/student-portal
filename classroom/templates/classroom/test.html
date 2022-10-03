@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Android Developemnt Using Java - classroom</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+        <link rel="stylesheet" href="../static/style/base.css">
+        <link rel="stylesheet" href="../static/style/classroom/classroom.css">
+        <!-- <link rel="stylesheet" href="../static/style/leftmenu.css"> -->
+        <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    </head>
+    <body>
+
+        <header class="main-header">
+            <div class="page-name-cont">
+                <div class="header-icon-cont"><i class="fas fa-chevron-left"></i></div>
+                <span class="header-name">
+                    <h2>Classroom</h2>
+                </sapn>
+            </div>
+            <article class="classroom-nav-cont">
+                <article class="classroom-nav selected-classroom-nav" onclick="switchToHome()">HOME</article>
+                <article class="classroom-nav" onclick="switchToClasswork()">CLASSWORK</article>
+            </article>
+        </header>
+
+        <main class="main-body">
+
+            <!-- <section class="mainBody-left">
+                <div class="student-profile-cont">
+                    <div class="stu-propic-cont"></div>
+                    <article class="stu-name-cont">
+                        <b>Vishnu P</b> <br>
+                        <span>BOATBCA024</span>
+                    </article>
+                </div>
+
+                <nav class="student-nav-cont">
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="fas fa-home"></i> Home</article></a>
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="far fa-calendar-check"></i> Attendence</article></a>
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="far fa-chart-bar"></i> Internals</article></a>
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="fas fa-rupee-sign"></i> Fees</article></a>
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="fas fa-user-circle"></i> Profile</article></a>
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="fas fa-envelope-open-text"></i>Complaints</article></a>
+                    <a href="asdasdasd.html"><article class="nav-item"><i class="fas fa-sign-out-alt"></i>Logout</article></a>
+                </nav>
+
+                <article class="student-currentSem-cont">
+                    <article>Semester 5 <span>of 6</span> </article>
+                    <div class="sem-meter-cont">
+                        <div class="sem-meter-inner"></div>
+                    </div>
+                </article>
+
+            </section> -->
+
+            <section class="classroom-home-cont">
+
+                <article class="classroom-cont">
+                    <label class="classroom-course-name"> <b>Android Development Using Java (BCA 5B 07)</b> </label>
+                    <label> Anuprhabha </label>
+                </article>
+
+                <div class="classroom-body">
+                    <section class="classroom-work-body">
+                        <section class="classroom-userShare-cont">
+                            <article class="userShare-defult">
+                                <i class="fas fa-user-circle"></i> <span>Share something to your class</span>
+                            </article>
+                            <div class="userShare-cont">
+                                <span>Share something to your class</span>
+                                <div class="canvasAndIcons">
+                                    <article class="userSharecontent" spellcheck="true" contenteditable></article>
+                                    <article class="userShare-icon-cont">
+                                        <i class="fas fa-bold userShare-icon-select" title="Bold"></i>
+                                        <i class="fas fa-italic" title="Italic"></i>
+                                        <i class="fas fa-underline" title="Underline"></i>
+                                        <i class="fas fa-list" title="List"></i>
+                                    </article>
+                                </div>
+                                <article class="button-cont">
+                                    <div>
+                                        <i class="fas fa-paperclip" title="Add attachments"></i>
+                                        <i class="fas fa-link" title="Add links" onclick="openAddLink()"></i>
+                                    </div>
+                                    <div>
+                                        <button id="btnCancelUserShare">Cancel</button>
+                                        <button id="btnSubmitUserShare" >Submit</button>    
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                        <section class="classroom-items-cont">
+                            <header>
+                                <div>
+                                    <section class="classroom-head-icon" style="background-color: #fff;"> <i class="fas fa-user-circle"></i> </section>
+                                    <article>
+                                        <span class="classroom-postBy">Anuphrabha</span> <br>
+                                        <span class="classroom-postTime">7 Oct 2021</span>
+                                    </article>
+                                </div>
+                                <i class="fas fa-chevron-down" data-mediaOpen="false" onclick="openClassroomMediaItems(this)"></i>
+                            </header>
+                            <article class="classroom-item-body">
+                                WEB PROGRAMMING CLASS_33(CALL BY VALUE AND REFERENCE)
+                            </article>
+                            <article class="classroom-media-cont">
+
+                                <div class="media-items">
+                                    <section class="media-image-cont"> 
+                                        <i class="fas fa-file-powerpoint"></i>     
+                                    </section>
+                                    <section class="media-body-cont">
+                                        <article>PHP PROGRAMMING_1.pptx</article>
+                                        <article>PowerPoint</article>
+                                    </section>
+                                </div>
+
+                                <div class="media-items">
+                                    <section class="media-image-cont">
+                                        <img src="sdfsd.jpg">
+                                    </section>
+                                    <section class="media-body-cont">
+                                        <article>PHP PROGRAMMING_1.pptx</article>
+                                        <article>PowerPoint</article>
+                                    </section>
+                                </div>
+
+                                <div class="media-items">
+                                    <section class="media-image-cont"></section>
+                                    <section class="media-body-cont">
+                                        <article>PHP PROGRAMMING_1.pptx</article>
+                                        <article>PowerPoint</article>
+                                    </section>
+                                </div>
+
+                                <div class="media-items">
+                                    <section class="media-image-cont"></section>
+                                    <section class="media-body-cont">
+                                        <article>PHP PROGRAMMING_1.pptx</article>
+                                        <article>PowerPoint</article>
+                                    </section>
+                                </div>
+
+                            </article>
+                            <article class="classroom-item-bottom">4 attachments</article>
+                        </section>
+
+                        <section class="classroom-work-cont">
+                            <header>
+                                <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                <article>
+                                    <span class="classroom-postBy"> <b> Anuphrabha posted a assignment: <label>DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE</label>  </b></span> <br>
+                                    <span class="classroom-postTime">7 Oct 2021</span>
+                                </article>
+                            </header> 
+                        </section>
+                        <section class="classroom-work-cont">
+                            <header>
+                                <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                <article>
+                                    <span class="classroom-postBy"> <b> Anuphrabha posted a assignment: <label>DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE</label>  </b></span> <br>
+                                    <span class="classroom-postTime">7 Oct 2021</span>
+                                </article>
+                            </header> 
+                        </section>
+                        <section class="classroom-work-cont">
+                            <header>
+                                <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                <article>
+                                    <span class="classroom-postBy"> <b> Anuphrabha posted a assignment: <label>DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE</label>  </b></span> <br>
+                                    <span class="classroom-postTime">7 Oct 2021</span>
+                                </article>
+                            </header> 
+                        </section>
+                        
+                    </section>
+                </div>
+
+            </section>
+
+            <section class="classwork-home-cont">
+                <div class="classwork-filter-cont">
+                    <header> <b>Filter</b> </header>
+                    <article class="filterSelected">All</article>
+                    <article>Submited</article>
+                    <article>Missing</article>
+                </div>
+                <div class="classwork-works-cont">
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                                <span>Done late</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span>Handed in</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                    <div class="classwork-item">
+
+                        <div class="classwork-item-align align-left">
+                            <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                            <section class="classwork-work-body">
+                                <article class="textOverDots"> <b>ASSIGNMRNT : </b> DIFFERENCE BETWEEN CALL BY VALUE AND CALL BY REFERENCE </article>
+                                <article class="classroom-postTime">7 Oct 2021</article>
+                            </section>
+                        </div>
+
+                        <div class="classwork-item-align align-right">
+                            <section class="classwork-work-due">7 Oct 2021, 11:59 pm</section>
+                            <section class="classwork-work-status">
+                                <span style="color: red;">Missing</span>
+                            </section>  
+                        </div>  
+
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <div class="addLink-outter">
+            <div class="addLink-cont popup">
+                <header> <span>Add link</sapn> </header>
+                <input type="text" id="inpAddLink" placeholder=" " autocapitalize="off">
+                <label class="addLink-placeholder">Add link here</label>
+                <section class="addLink-btn-cont">
+                    <button id="btnCloseAddLink">Cancel</button>
+                    <button id="btnAddLink">Add</button>
+                </section>
+            </div>
+        </div>
+
+        <script>
+
+            function switchToHome(){
+                $(".classwork-home-cont").hide() ;
+                $(".classroom-home-cont").show() ;
+
+                document.getElementsByClassName('classroom-nav')[1].classList.remove('selected-classroom-nav') ;
+                document.getElementsByClassName('classroom-nav')[0].classList.add('selected-classroom-nav') ;
+            }
+
+            function switchToClasswork(){
+                $(".classroom-home-cont").hide() ;
+                $(".classwork-home-cont").css("display", "flex") ;
+
+                document.getElementsByClassName('classroom-nav')[0].classList.remove('selected-classroom-nav') ;
+                document.getElementsByClassName('classroom-nav')[1].classList.add('selected-classroom-nav') ;
+            }
+            
+
+            document.getElementsByClassName('userShare-defult')[0].addEventListener("click", () => {
+                $(".userShare-defult").hide() ;
+                $(".userShare-cont").show() ;
+            }) ;
+
+            document.getElementById('btnCancelUserShare').addEventListener("click", () => {
+                $(".userShare-cont").hide() ;
+                $(".userShare-defult").show() ;
+            }) ;
+
+            function openAddLink() {
+                $(".addLink-outter").show() ;
+                $(".addLink-cont").show() ;
+                document.getElementById('inpAddLink').focus() ;
+            }
+
+            document.getElementById('btnCloseAddLink').addEventListener("click", () => {
+                $(".addLink-outter").hide() ;
+                $(".addLink-cont").hide() ;
+                document.getElementById('inpAddLink').value = "" ;
+            }) ;
+
+
+            function openClassroomMediaItems(t){
+                // console.log( $(t).parent().next().next().html() ) ;
+
+                if( $(t).attr("data-mediaOpen") == "false" ){
+                    $(t).parent().next().next().css({
+                    "height":"fit-content"
+                    }) ;
+                    $(t).css({
+                        "transform":"rotate(180deg)"
+                    }) ;
+                    $(t).attr("data-mediaOpen", "true") ;
+                } else {
+                    $(t).parent().next().next().css({
+                    "height":"0px"
+                    }) ;
+                    $(t).css({
+                        "transform":"rotate(0deg)"
+                    }) ;
+                    $(t).attr("data-mediaOpen", "false") ;
+                }
+
+                
+            }
+
+            
+
+        </script>
+
+    </body>
+</html>
+
+
+<!-- <img jsname="q4uQmd" jsaction="error:dyBsCf" class="" src="https://classroom.google.com/u/2/webthumbnail?url=http://facebook.com" aria-hidden="true" role="presentation" data-mime-type=""> -->

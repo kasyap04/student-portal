@@ -1,0 +1,19 @@
+<table border="1" id="table">
+<tr>
+        <th>Admin no</th>
+        <th>Name</th>
+        <th>Present</th>
+        <th>Absent</th>
+        <th>half day</th>
+    </tr>
+        <tr>
+            {% for i in stu  %}
+                <tr>
+                    <td data-adm="{{ i.adm_no}}" class="admNo">{{ i.adm_no }}</td>
+                    <td>{{ i.name }}</td>
+                    <td> <input type="radio" value="p" name="{{ i.adm_no }}att"> </td>
+                    <td> <input type="radio" value="a" name="{{ i.adm_no }}att"> </td>
+                    <td> <input type="radio" value="h" name="{{ i.adm_no }}att"> </td>
+                </tr>
+            {% endfor %}
+</table>

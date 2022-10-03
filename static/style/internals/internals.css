@@ -1,0 +1,251 @@
+/**************************** VIEW INTERNALS ***********************************/
+
+.internal-table-head, .internalMarkList section{
+    display: flex;
+}
+
+.internal-table-head article, .internalMarkList section article{
+    border-bottom: 1px solid #7a7a7a;
+    width: calc(100% / 4);
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.internalMarkList section article{
+    font-weight: normal;
+}
+
+.internal-name{
+    margin-top: 20px;margin-bottom: 10px;
+
+}
+
+.internal-table-head{
+    border-color: black ;
+}
+
+.internal-mark-list{
+    padding: 10px 0;
+}
+
+
+/**************************** ADD INTERNALS ***********************************/
+
+.main-body-middle{
+    width: calc(100% - 260px);
+    height: fit-content;
+}
+
+
+.main-body-right{
+    display: none;
+}
+
+.subject-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #3391ad;
+    width: calc(100% - 40px);
+    height: 130px;
+    border-radius: 10px;
+    margin:0 10px;
+    color: #ffffff;
+}
+
+.subject-cont article:nth-child(1){
+    font-size: 2em;
+}
+
+select{
+    padding: 5px 10px;
+    font-family: inherit;
+    /*outline: none;*/
+    border: none;
+    border-bottom: 1px solid var(--borderColor2);
+    font-size: 1em;
+}
+
+.exam-cont{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.exam-cont span{
+    color: grey;
+    font-size: 0.9em;
+    margin-right: 5px;
+
+}
+
+.exam-cont input{
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid var(--borderColor2);
+    font-size: 1em;
+}
+
+#internalTotalMark{
+    width: 50px;
+    text-align: center;
+}
+
+.student-list-cont{
+    margin-top: 30px;
+    background-color: rgba(173, 216, 230, 0.06);
+    border-radius: 10px;
+    width: 80%;
+}
+
+.student-list:hover, .edit-student-list:hover{
+    background-color: rgba(173, 216, 230, 0.13);
+    border-radius: 10px;
+}
+
+.student-list:last-child{
+    border: none
+}
+
+.student-name{
+    width: 200px;
+    transform: translateX(25%);
+}
+
+.student-list, .edit-student-list{
+    display: flex;
+    /*justify-content: space-between;*/
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--borderColor);
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.student-admno{
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+}
+
+.img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    background-color: lightblue;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+}
+
+.student-mark input{
+    padding: 8px;
+    width: 50px;
+    border: none;
+    border-bottom: 1px solid var(--borderColor2);
+    text-align: center;
+}
+
+.internal-btn-cont{
+    margin-top: 30px;
+    text-align: end;
+    background-color: #ffffff;
+}
+
+.internal-btn-cont button{
+    border: none;
+    padding: 10px 20px;
+    background: none;
+}
+
+.internal-btn-cont button:nth-child(1){
+    color: grey;
+    margin-right: 20px;
+}
+
+.internal-btn-cont button:nth-child(2){
+    font-weight: bold;
+}
+
+
+/****************************EDIT INTERNALS********************************/
+
+.student-list-cont a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.edit-student-list{
+    justify-content: unset;
+    width: fit-content;
+    padding:10px 30px;
+}
+
+.edit-student-list article{
+    margin-left: 10px;
+    display: grid;
+}
+
+.edit-student-list article span:nth-child(1), .edit-internals-cont header article span:nth-child(1){
+    font-size: 1.2em;
+}
+
+.edit-student-list article span:nth-child(2), .edit-internals-cont header article span:nth-child(2){
+    font-size: 0.7em;
+    color: grey;
+}
+
+.edit-internals-cont{
+    margin-top: 20px;
+}
+
+.edit-internals-cont header{
+    display: flex;
+    align-items: center;
+}
+.edit-internals-cont header article{
+    display: grid;
+}
+
+.edit-part article span:nth-child(2){
+    color: #000000;
+    font-size: 1em;
+}
+
+.edit-internals{
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+
+.edit-marks-cont{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.edit-marks-cont input{
+    padding: 5px;
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    border-bottom: 1px solid var(--borderColor2);
+}
+
+.edit-marks-cont button{
+    margin-left: 30px;
+    font-weight: bold;
+    background: none;
+    border: 1px solid var(--borderColor2);
+    padding: 10px;
+}

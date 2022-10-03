@@ -1,0 +1,25 @@
+    .subjects-list-cont{
+        display: flex;
+    }
+
+    .subject-list{
+        height: 100px;
+        width: 200px;
+        background-color: lightblue;
+        border-radius: 10px ;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-transform: capitalize;
+        margin: 0 10px;
+    }
+
+    .subject-name{
+        font-size: 1.3em;
+    }
+
+    .subject-teacher{
+        color: grey;
+        font-size: 0.9em;
+    }

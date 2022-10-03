@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv='Cache-Control' content='no-cache, must-revalidate'>
+        <meta http-equiv='Pragma' content='no-cache'>
+        <meta http-equiv='Expires' content='0'>
+        <link rel="icon" type="image/x-icon" href="/static/images/icon.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+        <link rel="stylesheet" href="/static/style/base.css">
+        <link rel="stylesheet" href="/static/style/student/student.css">
+        <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <script src="/static/script/base.js"></script>
+    </head>
+    <body> {% csrf_token %}
+        <header class="main-header">
+            <div class="page-name-cont">
+                <div class="header-icon-cont"> <img src="/static/images/icon.png"> </div>
+                <span class="header-name">
+                    <h2>Students Portal</h2>
+                </span>
+            </div>
+        </header>
+
+        <div class="main-body">
+
+            <section class="mainBody-left">
+
+                <div class="student-profile-cont">
+                    <div>
+                        <div class="stu-propic-cont">
+                            <img src="" id="myimage">
+                        </div>
+                        <article class="stu-name-cont">
+                            <b id="myname"></b> <br>
+                            <span id="myadmno"></span>
+                        </article>
+                    </div>
+                    <div id="lastlogin"></div>
+                </div>
+
+{# /subject/viewSubject_student #}
+                <nav class="student-nav-cont">
+                    <a href="/temp/student/"><article class="nav-item selectedNav"><i class="fas fa-home"></i> Home</article></a>
+                    <a href="/attendence/myattendence/"><article class="nav-item"><i class="far fa-calendar-check"></i> Attendence</article></a>
+                    <!-- <a href="asdasdasd.html"><article class="nav-item"><i class="fas fa-calendar-day"></i> Events</article></a> -->
+                    <a href="/internals/viewInternals/"><article class="nav-item"><i class="far fa-chart-bar"></i> Internals</article></a>
+                    <a href="/fees/view/"><article class="nav-item"><i class="fas fa-rupee-sign"></i> Fees</article></a>
+                    <a href="/student/profile/"><article class="nav-item"><i class="fas fa-user-circle"></i> Profile</article></a>
+                    <a href="/complaints/add/"><article class="nav-item"><i class="fas fa-envelope-open-text"></i>Complaints</article></a>
+                    <a><article class="nav-item" onclick="openLogoutCont()"><i class="fas fa-sign-out-alt"></i>Logout</article></a>
+                </nav>
+
+            </section>
+
+            <section class="mainBody-middle">
+            {% block base %}
+                <title>{{ myname }} - Student | Don Bosco Collage Mampetta</title>
+                <link rel="stylesheet" href="/static/style/student/profile.css">
+                <div class="classroom-cont">
+                    <header class="middleCont-header"><b>My subjects</b></header>
+                    <div class="classroom-subject-cont">
+                        {% for s in subjects %}
+                            <a href="/classroom/viewclassroom?sub={{ s.sub_id }}"><section class="classroom">
+                                <span><b>{{ s.name }}</b></span>
+                                <span>{{ s.teacher_id }}</span>
+                            </section></a>
+                        {% endfor %}
+                    </div>
+
+                    <div class="classroom-work-outer">
+                        <header class="middleCont-header"><b>Classworks</b></header>
+                        <section>
+                            {% if today_classwork %}
+                            {% for c in today_classwork %}
+                            <a class="classwork-a" href="/classroom/submit?work={{ c.work_id }}">
+                                <section class="classroom-work-cont">
+                                    <header>
+                                        <section class="classroom-head-icon"> <i class="fas fa-file-alt"></i> </section>
+                                        <article>
+                                            <span class="classroom-postBy"> <b> {{ c.teacher }}  posted a {{ c.title }}: <label>{{ c.body }}</label>  </b></span> <br>
+                                            <span class="classroom-postTime">{{ c.date }}</span>
+                                        </article>
+                                    </header>
+                                </section>
+                            </a>
+                            {% endfor %}
+                                {% else %}
+                                <article class="noworkmsg">You have no classwork</article>
+                            {% endif %}
+                        </section>
+                    </div>
+                </div>
+                
+            {% endblock %}
+            </section>
+
+            <section class="mainBody-right">
+            {% if subjects %}
+                <div class="notification-cont">
+                    <header class="rightCond-header"><b>Notifications</b></header>
+                    <section class="notification-inner-cont">
+                        {% if notifications %}
+                            {% for n in notifications %}
+                                <article class="notification-date">{{ n.date }}</article>
+
+                                {% for noti in n.notif %}
+                                    <article class="notification">
+                                        <article class="notifaction-sender">
+                                             <span><b>{{ noti.send_by }}</b> <i class="fas fa-circle"></i> <label>{{ noti.time }}</label> </span>
+                                             <i class="fas fa-angle-down" data-open="f" onclick="openNotification(this)"></i>
+                                        </article>
+                                        <article class="notification-body">
+                                            {{ noti.body }}
+                                        </article>
+                                    </article>
+                                {% endfor %}
+
+                            {% endfor %}
+                            {% else %}
+                            <article class="no-content-cont">You have no noifications</article>
+                        {% endif %}
+                    </section>
+
+                </div>
+
+                <div class="event-cont">
+                    <header class="rightCond-header"><b>Upcoming events</b></header>
+                    <section class="event-calendar-cont">
+                    {% if events %}
+                    {% for e in events %}
+                        <section class="event-list-cont">
+                           <article class="event-date"> <span>{{ e.date }}</span> <span>{{ e.left }}</span> </article>
+                           <article class="event-name">{{ e.body }}</article>
+                       </section>
+                    {% endfor %}
+                    {% else %}
+                        <article class="no-content-cont">No upcoming events</article>
+                    {% endif %}
+
+
+                    </section>
+                </div>
+                {% else %}
+                {% block classmates %} {% endblock %}
+            {% endif %}
+            </section>
+
+        </div>
+
+        <div class="lineMsg-cont">Its a single line message</div>
+
+         <div class='loading-outer'>
+                <div class='loadingCont'>
+                    <div class="loading-icon" id="loadingIcon">
+                        <div class='clock1'>
+                            <div class='big-one'></div>
+                        </div>
+                        <div class='clock2'>
+                            <div class='small-one'></div>
+                        </div>
+                        <label>Loading..</label>
+                    </div>
+                </div>
+            </div>
+
+        <div class="logut-outer">
+            <div class="logout-cont">
+                <section>Are you sure you want to logout?</section>
+                <section>
+                    <button onclick="closeLogoutCont()">Not now</button>
+                    <button onclick="logout()">Logout</button>
+                </section>
+            </div>
+        </div>
+
+        <script src="/static/script/student/index.js"></script>
+    </body>
+</html>

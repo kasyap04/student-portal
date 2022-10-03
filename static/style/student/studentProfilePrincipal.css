@@ -1,0 +1,68 @@
+.main-body-right{
+    display: block;
+    background-color: #ffffff;
+    height: calc(100vh - 70px);
+}
+
+.main-body-middle, .main-body-right{
+    padding: 10px;
+}
+
+.middleCont-header{
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.profile-contactDetails-cont{
+    width: calc(100% - 490px);
+}
+
+.classmate-inner-cont a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.rightCond-header{
+    border-bottom: 1px solid var(--borderColor);
+    padding-bottom: 10px;
+}
+
+
+.profile-contactDetails-cont{
+    margin-left: 0;
+}
+
+.students-action-cont{
+    width: 50%;
+    margin-top: 10px;
+    padding: 10px;
+    /*width: fit-content;*/
+    background-color: #ffffff;
+    box-shadow: 0px 1px 1px 1px var(--shadowColor);
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.profile-cont-headers{
+    color: grey;
+}
+
+.students-action-cont a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.students-action-cont article{
+    padding: 15px;
+    margin: 5px 0;
+    width: 180px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: calc(100% - 30px);
+}
+
+.students-action-cont article:hover{
+    background-color: rgba(173, 216, 230, 0.12);
+}

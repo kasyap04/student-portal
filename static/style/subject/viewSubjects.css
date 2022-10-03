@@ -1,0 +1,273 @@
+.main-body-middle{
+    width: calc(100% - 590px);
+    height: fit-content;
+}
+
+.main-body-right{
+    display: block;
+}
+
+.department-cont{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+.department-cont section{
+    text-align: center;
+    padding: 20px;
+}
+
+.department-cont section article:nth-child(1){
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 1.1em;
+}
+
+.department-cont section article:nth-child(2){
+    color: grey;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.view-subject-list{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--borderColor2);
+}
+
+.view-subject-list article{
+    margin: 10px;
+    text-align: center;
+    /*background-color: lightgray;*/
+}
+
+.view-subject-type{
+    width: 80px;
+    color: grey;
+    font-size: 0.9em;
+}
+
+.view-subject-code{
+    width: 100px;
+}
+
+.view-subject-name{
+    width: calc(100% - 430px);
+}
+
+.view-subject-teacher{
+    width: 200px;
+}
+
+.rightCond-header{
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.view-subject-details{
+    margin-bottom: 40px;
+}
+
+.view-subject-details article{
+    text-transform: capitalize;
+}
+
+.stu-list{
+    padding: 10px 0;
+    /*border-bottom: 1px solid var(--borderColor);*/
+    display: flex;
+    align-items: center;
+    /*background-color: lightgray;*/
+    margin: 10px 0;
+}
+
+.view-subject-details a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.right-cont{
+    overflow-y: scroll;
+    height: calc(100vh - 90px);
+}
+
+.stu-list:last-child{
+    border: none;
+}
+
+.img{
+    height: 40px;
+    width: 40px;
+    background-color: lightgreen;
+    border-radius: 50px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+}
+
+.stu-list article{
+    display: grid;
+}
+
+.stu-list article span:nth-child(1){
+    text-transform: capitalize;
+}
+
+.stu-list article span:nth-child(2){
+    font-size: 0.8em;
+    color: grey;
+}
+
+
+/********************************* EDIT SUBJECTS **********************************/
+
+.editSubject-list-cont{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.editSubject-list-cont article{
+    margin: 10px;
+    padding: 10px;
+    /*background-color: lightgray;*/
+}
+
+.edit-sub-name{
+    /*background-color: lightgray;*/
+    width: 320px;
+}
+
+.edit-sub-code{
+    width: 100px;
+}
+
+.edit-sub-type{
+    width: 100px;
+}
+
+.edit-sub-teacher{
+    width: 250px;
+}
+
+.edi-btns{
+    display: none;
+}
+
+.edit-sub-editBtn{
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px solid grey;
+    font-weight: bold;
+    /*display: none;*/
+}
+
+.edit-dub-delBtn, .edit-sub-saveBtn{
+    background-color: red;
+    padding: 10px 20px;
+    border: 1px solid red;
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.edit-sub-saveBtn{
+    background-color: green;
+    border: 1px solid green;
+}
+
+.edit-sub-cancelbtn{
+    margin-top: 10px;
+    /*padding: 6px 20px;*/
+    background-color: #ffffff;
+    font-weight: bold;
+    border: none;
+    width: 160px;
+}
+
+.edit-sub-btn-cont{
+    /*background-color: lightgreen;*/
+}
+
+.delete-conf-outer, .teacher-sel-outer{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.delete-conf-cont{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0px 1px 5px 3000px var(--shadowColor);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px;
+}
+
+.delete-conf-cont section{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.delete-conf-cont section button{
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.delete-conf-cont section button:nth-child(1){
+    color: grey;
+}
+
+.delete-conf-cont section button:nth-child(2){
+    font-weight: bold;
+}
+
+.teacher-sel-cont{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    box-shadow: 0px 1px 5px 3000px var(--shadowColor);
+    padding: 10px;
+    border-radius: 10px;
+    width: 250px;
+}
+
+.teacher-sel-cont header{
+    color: grey;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.teacher-sel-cont div{
+    text-align: center;
+    margin: 20px auto;
+}

@@ -1,0 +1,99 @@
+.main-body-middle{
+    height: fit-content;
+}
+
+.department-cont{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-bottom: 20px;
+}
+
+.department-cont section{
+    text-align: center;
+    padding: 20px;
+}
+
+.department-cont section article:nth-child(1){
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.department-cont section article:nth-child(2){
+    color: grey;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.student-cont{
+    background-color: rgba(73, 183, 211, 0.08);
+    margin-bottom: 30px;padding: 10px;
+    border-radius: 10px;
+}
+
+.student-cont-top{
+    display: flex;
+    align-items: center;
+}
+
+.student-cont-image{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.student-cont-image img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+}
+
+.student-cont-name{
+    text-transform: capitalize;
+}
+
+.student-cont-adm{
+    font-size: 0.75em;
+    color: grey;
+}
+
+.student-cont-bottom{
+    border-top: 1px solid var(--borderColor);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.student-cont-fee{
+    display: flex;
+    text-align:center ;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.student-cont-feeDetails{
+    /*background-color: lightgreen;*/
+    padding: 10px;
+    margin: 0 10px;
+    width: 160px;
+}
+
+.student-cont-feeDetails article:nth-child(1){
+    font-size: 1.1em;
+}
+
+.student-cont-feeDetails article:nth-child(2){
+    color: grey;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.student-cont-notPaid{
+    color: red;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='Cache-Control' content='no-cache, must-revalidate'>
+    <meta http-equiv='Pragma' content='no-cache'>
+    <meta http-equiv='Expires' content='0'>
+    <link rel="icon" type="image/x-icon" href="/static/images/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+    <link rel="stylesheet" href="/static/style/base.css">
+    <link rel="stylesheet" href="/static/style/principal/principal.css">
+    <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="/static/script/base.js"></script>
+</head>
+    <body> {% csrf_token %}
+            <header class="main-header">
+                <div class="page-name-cont">
+                    <div class="header-icon-cont"></div>
+                    <span class="header-name">
+                        <h2>Students Portal</h2>
+                    </span>
+                </div>
+
+                <div>
+                    <div class="search-student-cont">
+                        <input type="text" id="search" placeholder="Search students here..." oninput="searchStudents(this)" autocomplete="off"><i class="fas fa-search"></i>
+                    </div>
+                    <div class="search-result-cont" id="searchResult">
+                    </div>
+                </div>
+            </header>
+
+        <div class="main-body">
+
+            <section class="main-body-left">
+                <div class="teacher-profile-cont">
+                <section class="teacher-profile-top">
+                    <section class="teacher-profile-img-cont"> <i class="fas fa-user-circle"></i> </section>
+                    <section class="teacher-profile-name-cont"><b>Principal</b> <label id="myName"></label> </section>
+                </section>
+                <section class="teacher-profile-bottom" id="lastlogin"></section>
+            </div>
+                <nav class="principal-nav-cont ">
+                    <a href="/temp/principal/"><article class="nav-item"><i class="fas fa-home"></i>Home</article></a>
+                    <a href="/complaints/view"><article class="nav-item"><i class="fas fa-envelope-open-text"></i>Complaints</article></a>
+                    <a><article class="nav-item" onclick="openLogoutCont()"><i class="fas fa-sign-out-alt"></i>Logout</article></a>
+                </nav>
+            </section>
+
+            <section class="main-body-middle">
+                {% block principalMiddle %}
+                    <title>Principal | Don Bosco Collage Mampetta</title>
+                    <div class="middle-cont innerCont">
+                        <header class="middle-header"> <b>Departments</b>  </header>
+                        <div class="middle-inner-cont view-department">
+                            {% for d in departments %}
+                                <section class="department" data-depId="{{ d.dep_id }}" data-dur="{{ d.duration }}" onclick="openSemCount(this, event)">
+                                    <article class="view-dep-name">{{ d.name }}</article>
+                                    <article class="view-dep-hod"><span>{{ d.hod }}</span>  <i class="fas fa-ellipsis-v" data-depName="{{ d.name }}" data-depId="{{ d.dep_id }}" onclick="openSendNofiCount(this, event)"></i></article>
+                                </section>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <script>
+for (var i = 0; i < document.getElementsByClassName('principal-nav-cont')[0].children.length; i++){
+    document.getElementsByClassName('principal-nav-cont')[0].children[i].children[0].classList.remove('selectedNav') ;
+}
+
+document.getElementsByClassName('principal-nav-cont')[0].children[0].children[0].classList.add('selectedNav') ;
+
+                    </script>
+                {% endblock %}
+            </section>
+
+            <section class="main-body-right">
+                {% block principalRight %}
+                {% endblock %}
+            </section>
+
+        </div>
+
+    <div class="sel-sem-outer">
+        <div class="sel-sem-cout" data-dep="">
+            <header><label>Select semester</label> <i class="fas fa-times" onclick="closeSelectSem()"></i></header>
+            <section id="semCont">
+            </section>
+        </div>
+    </div>
+
+    <div class="menu-cont menu-notif">
+        <a href=""><article><i class="fas fa-bell"></i> Send notification</article></a>
+    </div>
+
+    <div class="menu-cont menu-subject">
+        <a href=""><article><i class="fas fa-bell"></i> Send notification</article></a>
+        <a href=""><article><i class="fas fa-rupee-sign"></i> Student fee</article></a>
+        <a href=""><article><i class="far fa-calendar-check"></i> Attendence</article></a>
+        <a href=""><article><i class="far fa-chart-bar"></i> Internals</article></a>
+    </div>
+
+
+    <div class="lineMsg-cont">Its a single line message</div>
+
+         <div class='loading-outer'>
+                <div class='loadingCont'>
+                    <div class="loading-icon" id="loadingIcon">
+                        <div class='clock1'>
+                            <div class='big-one'></div>
+                        </div>
+                        <div class='clock2'>
+                            <div class='small-one'></div>
+                        </div>
+                        <label>Loading..</label>
+                    </div>
+                </div>
+            </div>
+
+        <div class="logut-outer">
+            <div class="logout-cont">
+                <section>Are you sure you want to logout?</section>
+                <section>
+                    <button onclick="closeLogoutCont()">Not now</button>
+                    <button onclick="logout()">Logout</button>
+                </section>
+            </div>
+        </div>
+
+    <script src="/static/script/principal/principal.js"></script>
+    </body>
+</html>

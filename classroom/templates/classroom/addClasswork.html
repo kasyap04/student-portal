@@ -1,0 +1,67 @@
+
+<h1>Add classwork</h1>
+{% csrf_token %}
+<div><input type="hidden" id="dep" value="{{ dep }}">
+<input type="hidden" id="sem" value="{{ sem }}">
+<input type="hidden" id="sub" value="{{ sub }}">
+
+classwork title : <input type="text" id="title"> <br>
+classwork body : <input type="text" id="body"> <br>
+due date : <input type="date" id="date"> Time : <input type="time" id="time"><br>
+<button onclick="submitClasswork()">submit</button>
+
+</div>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+    resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 ) ;
+
+    function submitClasswork() {
+
+        let work = {
+            dep: document.getElementById('dep').value,
+            sem: document.getElementById('sem').value,
+            sub: document.getElementById('sub').value,
+            title: document.getElementById('title').value.trim(),
+            body: document.getElementById('body').value.trim() ,
+            time:  document.getElementById('time').value,
+            date:  document.getElementById('date').value
+        } ;
+
+        console.log(work) ;
+
+        let canUpload = true ;
+
+        for(let i = 0; i <= 6; i++){
+            if(work[Object.keys(work)[i]] == ""){
+                canUpload = false ;
+                break ;
+            }
+        }
+
+        if(canUpload){
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "",
+                data:{csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(), d: JSON.stringify(work)},
+                success: function (result) {
+                    console.log(result) ;
+                    try {
+                      let data = JSON.parse(resJson(result))[0] ;
+                        if(data == "s"){
+                           console.log("SUCCESS") ;
+                        }
+                    } catch (e) {
+                        console.log(e, "ERROR")
+                    }
+                },
+                error: function (jqXHR, exception, responseText) {
+                    console.log(jqXHR, exception, responseText) ;
+                }
+            }) ;
+        }
+
+    }
+
+</script>

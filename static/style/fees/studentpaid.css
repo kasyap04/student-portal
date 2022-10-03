@@ -1,0 +1,72 @@
+.main-body-middle{
+    height: fit-content;
+}
+
+.stu-fee-cont header{
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--borderColor);
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+.stu-fee-list-cont{
+    display: flex;
+    background-color: rgba(211, 211, 211, 0.11);
+    padding: 10px;
+    width: fit-content;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.stu-fee-list-cont section{
+    margin: 10px 40px;
+    text-align: center;
+}
+
+.stu-fee-list-cont section article:nth-child(2){
+    font-size: 0.8em;
+    color: grey;
+    margin-top: 5px;
+}
+
+.stu-addFee-cont{
+    margin-top: 20px;
+}
+
+.stu-addFee-cont section{
+    display: grid;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.stu-addFee-cont section span{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.stu-addFee-cont input{
+    padding: 15px;
+    outline: none;
+    border: 1px solid var(--borderColor2);
+    border-radius: 5px;
+}
+
+.stu-addFee-cont label{
+    font-size: 0.7em;
+    color: red;
+    display: none;
+}
+
+.addFeeBtn{
+    padding: 15px 20px;
+    width: 300px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    outline: none;
+    background-color: #24638f;
+    border: 1px solid #24638f;
+    color: #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+}

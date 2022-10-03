@@ -1,0 +1,50 @@
+{% extends 'temp/principal.html' %}
+{% block principalMiddle %}
+    <title>Attandene</title>
+    <link rel="stylesheet" href="/static/style/attendence/viewAttendenceByPrincipal.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Attendence</b>  </header>
+        <div class="middle-inner-cont view-attendence">
+            <header><input type="month" value="{{ y }}-{{ m }}" id="selMonth" onchange="dateChange(this)"> <section>
+                <section class="attendence-present attend-mark"></section> <span>Present</span>
+                <section class="attendence-absent attend-mark"></section> <span>Absent</span>
+                <section class="attend-mark"></section> <span>Half day</span>
+            </section> </header>
+            <div class="attendence-main">
+                <div class="attendence-head">
+                    {% for d in days %}
+                    <section class="attendence-head-days">
+                        <span>{{ d.day }}</span>
+                        <span>{{ d.week }}</span>
+                    </section>
+                    {% endfor %}
+                </div>
+
+                <div class="attendence-attend-cont">
+                    {% for a in attendence %}
+                    <div class="attendence-stu-list">
+                        <section class="attendence-stu" title="{{ a.name }}">
+                            <div class="stu-image"> <img src="/static/{{ a.image }}"> </div>
+                            <article class="stu-name">
+                                <span>{{ a.name }}</span>
+                                <span>{{ a.adm }}</span>
+                            </article>
+                        </section>
+                    {% for d in a.days %}
+                        <section class="attendence-mark">{% if d.attend == "p" %}
+                            <section class="attendence-present attend-mark"></section>
+                            {% elif d.attend == "a" %}
+                            <section class="attendence-absent attend-mark"></section>
+                            {% elif d.attend == "h" %}
+                            <section class="attend-mark"></section>
+                        {% endif %} </section>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="/static/script/attendence/viewAttendencePrincipal.js"></script>
+{% endblock %}

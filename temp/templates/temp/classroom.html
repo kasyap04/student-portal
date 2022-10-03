@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv='Cache-Control' content='no-cache, must-revalidate'>
+        <meta http-equiv='Pragma' content='no-cache'>
+        <meta http-equiv='Expires' content='0'>
+        <link rel="icon" type="image/x-icon" href="/static/images/icon.png">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+        <link rel="stylesheet" href="/static/style/base.css">
+        <link rel="stylesheet" href="/static/style/classroom/classroom.css">
+        <script src='https://kit.fontawesome.com/d6494799fc.js' crossorigin='anonymous'></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+        <script src="/static/script/base.js"></script>
+    </head>
+    <body>
+
+        <header class="main-header">
+            <div class="page-name-cont">
+                <div class="header-icon-cont"><i class="fas goback fa-chevron-left"></i></div>
+                <span class="header-name">
+                    <h2>Classroom</h2>
+                </span>
+            </div>
+
+            <article class="classroom-nav-cont">
+                <article class="classroom-nav selected-classroom-nav" onclick="classroomSwitch(0)">HOME</article>
+                <article class="classroom-nav" onclick="classroomSwitch(1)">CLASSWORK</article>
+                <article class="classroom-nav" onclick="classroomSwitch(2)">STUDENTS</article>
+            </article>
+        </header>
+
+        <main class="main-body">
+
+            {% block classroom %}
+            {% endblock %}
+
+        </main>
+
+        <div class="lineMsg-cont"></div>
+
+         <div class='loading-outer'>
+                <div class='loadingCont'>
+                    <div class="loading-icon" id="loadingIcon">
+                        <div class='clock1'>
+                            <div class='big-one'></div>
+                        </div>
+                        <div class='clock2'>
+                            <div class='small-one'></div>
+                        </div>
+                        <label>Loading..</label>
+                    </div>
+                </div>
+            </div>
+
+
+        <script src="/static/script/base.js"></script>
+        <script src="/static/script/classroom/classroom.js"></script>
+    </body>
+</html>

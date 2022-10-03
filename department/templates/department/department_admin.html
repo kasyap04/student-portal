@@ -1,0 +1,41 @@
+{% extends 'temp/admin.html' %}
+
+{% block adminMiddle %}
+    <title>Edit Department</title>
+    <link rel="stylesheet" href="/static/style/department/edit.css">
+<div class="middle-cont innerCont">
+    <header class="middle-header"> <b>Edit departments</b></header>
+
+    <div class="department-edit-cont">
+
+    {% for i in dep %}
+        <section class="department-list-cont">
+            <article class="department-abbr department-list"> {{ i.short_name }} </article>
+            <article class="department-name department-list"> {{ i.name }} </article>
+            <article class="department-dur department-list" > <span>{{ i.duration }}</span> years </article>
+            <article class="department-hod department-list" > <select>
+                <option></option>
+                {% for t in i.hodNames %}
+                    {% if t.id == i.hod %}
+                        <option value="{{ t.id }}" selected>{{ t.name }}</option>
+                        {% else %}
+                        <option value="{{ t.id }}" >{{ t.name }}</option>
+                    {% endif %}
+                {% endfor %}
+
+            </select> </article>
+            <article class="department-option-cont">
+                <button onclick="editDepartment({{ i.dep_id }}, {{ i.count }})" class="editBtn edit{{ i.count }}">Edit</button>
+                <button onclick="cancelUpdate({{ i.count }})" class="cancelBtn cancel{{ i.count }}">cancel</button>
+                <button onclick="updateDepartment({{ i.dep_id }}, {{ i.count }})" class="saveBtn save{{ i.count }}">Update</button>
+            </article>
+    </section>
+    {% endfor %}
+
+
+    </div>
+
+
+</div>
+<script src="/static/script/department/edit.js"></script>
+{% endblock %}

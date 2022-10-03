@@ -1,0 +1,77 @@
+.classwork-cont{
+    margin-top: 0;
+}
+
+.attend-cont{
+    background-color: rgba(173, 216, 230, 0.16);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.week-cont{
+    border-bottom:1px solid var(--borderColor2) ;
+}
+
+.week-cont, .days-cont{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    grid-gap: 10px;
+}
+
+.days-cont{
+    margin-top: 10px;
+}
+
+.week-cont article, .days-cont article{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.day-present{
+    background-color: green;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.day-absent{
+    background-color: rgb(249, 33, 1);
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.day-halfday{
+    background-color: grey;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+.attendence-top-cont{
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+input{
+    padding: 10px;
+    border: 1px solid var(--borderColor2);
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.attendence-instruction{
+    display: flex;
+    align-items: center;
+}
+
+.attendence-instruction section{
+    height: 10px;
+    width: 10px;
+    margin-left: 30px;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+

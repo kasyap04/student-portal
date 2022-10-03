@@ -1,0 +1,72 @@
+.main-body-middle{
+    height: fit-content;
+}
+
+select{
+    padding: 10px;
+    border: 1px solid var(--borderColor2);
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.internal-main{
+    width: 100%;
+    overflow-x: scroll;
+}
+
+table{
+    margin-top: 40px;
+    border: none;
+    overflow-x: scroll;
+    width: fit-content;
+}
+
+.student-name-cont{
+    display: flex;
+    align-items: center;
+}
+
+.image-cont{
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+
+.image-cont img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+}
+
+.student-name-cont article{
+    display: grid;
+}
+
+.student-name-cont article span:nth-child(2){
+    font-size: 0.7em;
+    color: grey;
+}
+
+.student-area td{
+    border-bottom: 1px solid var(--borderColor2);
+    /*background-color: lightblue;*/
+    margin: 10px 0;
+}
+
+.student-area td:first-child{
+    border: none;
+}
+
+.internal-sub-head{
+    font-size: 0.8em;
+    color: grey;
+}
+
+.internal-total{
+    color: grey;
+}

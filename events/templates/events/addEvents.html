@@ -1,0 +1,64 @@
+{% extends 'temp/admin.html' %}
+{% block adminMiddle %}
+    <title>Add Collage Events | Don Bosco Collage Mampetta</title>
+    <link rel="stylesheet" href="/static/style/events/addevents.css">
+    <div class="middle-cont innerCont">
+        <header class="middle-header"> <b>Add collage events</b> </header>
+        <div class="middle-inner-cont add-events">
+            <section class="addEvent-date addEvent">
+                <span>Date</span>
+                 <input type="date" id="addEventDate">
+                 <label>sdf</label>
+            </section>
+            <section class="addEvent-body addEvent">
+                <span>Event name</span>
+                 <textarea id="addEventBody"></textarea>
+                 <label>sdf</label>
+            </section>
+            <section class="addEvent-btn-cont">
+                <button onclick="addEvents()">Add event</button>
+            </section>
+        </div>
+    </div>
+    <script src="/static/script/events/addevent.js"></script>
+{% endblock %}
+<h1>Add Events</h1>
+
+
+    {% csrf_token %}
+    Date : <input type="date" id="date"> <br>
+    Event body : <br><textarea id="event"></textarea> <br>
+<input type="button" value="submit" onclick="addEvents()">
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script>
+resJson = str => str.substring( str.indexOf('sta[')+3, str.indexOf(']end')+1 )
+    function addEvents() {
+        const date = document.getElementById('date').value,
+            event = document.getElementById('event').value.trim() ;
+
+        if(date != "" && event != ""){
+            $.ajax({
+                cache:false,
+                type:"POST",
+                url:"uploadevents",
+                data: {csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+                date: date, event: event },
+                success: function (result) {
+                    console.log(result) ;
+                    let data = JSON.parse(resJson(result))[0]
+                    if (data == "s"){
+                        document.getElementById('event').value = ""
+                        console.info("SUCCESS")
+                    } else if(data == "pd"){
+                        alert("sadas") ;
+                    }
+                },
+                error: function (jqXHR, exception, responseText) {
+                    console.log(jqXHR, exception, responseText)
+                }
+            })
+        }
+    }
+
+</script>
